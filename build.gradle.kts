@@ -6,7 +6,7 @@ plugins {
     id("com.github.johnrengelman.shadow") version "8.1.1"
     id("xyz.jpenilla.run-paper") version "2.2.3"
     id("net.minecrell.plugin-yml.bukkit") version "0.6.0"
-    kotlin("plugin.serialization") version "1.9.22"
+    kotlin("plugin.serialization") version "1.9.23"
 }
 
 group = "dev.nikomaru" //TODO need to change
