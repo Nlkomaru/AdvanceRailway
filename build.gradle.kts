@@ -35,7 +35,7 @@ dependencies {
     val lampVersion = "3.1.9"
     val koinVersion = "3.5.3"
     val coroutineVersion = "1.7.3"
-    val serializationVersion = "1.6.2"
+    val serializationVersion = "1.6.3"
 
 
     compileOnly("io.papermc.paper:paper-api:$paperVersion")
