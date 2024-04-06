@@ -7,11 +7,8 @@
  * If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
  */
 
-rootProject.name = "AdvanceRailway"
+package dev.nikomaru.advancerailway.file.data
 
-pluginManagement {
-    repositories {
-        gradlePluginPortal()
-        maven("https://papermc.io/repo/repository/maven-public/")
-    }
+enum class LineType {
+    UP_LINE, DOWN_LINE, UP_DOWN_LINE
 }

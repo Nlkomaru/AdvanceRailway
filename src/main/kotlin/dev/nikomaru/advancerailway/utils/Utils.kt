@@ -7,11 +7,15 @@
  * If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
  */
 
-rootProject.name = "AdvanceRailway"
+package dev.nikomaru.advancerailway.utils
 
-pluginManagement {
-    repositories {
-        gradlePluginPortal()
-        maven("https://papermc.io/repo/repository/maven-public/")
+import kotlinx.serialization.json.Json
+
+object Utils {
+    val json = Json {
+        ignoreUnknownKeys = true
+        isLenient = true
+        encodeDefaults = true
+        prettyPrint = true
     }
 }

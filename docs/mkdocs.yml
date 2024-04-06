@@ -1,4 +1,4 @@
-site_name: PluginTemplate Docs
+site_name: AdvanceRailway Docs
 theme:
   name: material
   language: en
@@ -37,9 +37,6 @@ plugins:
           default: true
           name: English
           build: true
-        - locale: ja
-          name: 日本語
-          build: true
-repo_url: https://github.com/Nlkomaru/PluginTemplate
-repo_name: PluginTemplate
+repo_url: https://github.com/Nlkomaru/AdvanceRailway
+repo_name: AdvanceRailway
 copyright: No Rights Reserved(CC0).  Written by Nikomaru in 2024

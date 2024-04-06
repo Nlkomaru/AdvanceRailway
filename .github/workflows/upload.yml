@@ -29,8 +29,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ github.event.release.upload_url }}
-          asset_path: ./build/libs/PluginTemplate-1.0-SNAPSHOT-all.jar # TODO need to change
-          asset_name: PluginTemplate_${{ github.event.release.tag_name }}.jar # TODO need to change
+          asset_path: ./build/libs/AdvanceRailway-1.0-SNAPSHOT-all.jar
+          asset_name: AdvanceRailway_${{ github.event.release.tag_name }}.jar
           asset_content_type: application/jar
 
 

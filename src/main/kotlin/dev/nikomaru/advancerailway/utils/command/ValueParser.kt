@@ -7,11 +7,15 @@
  * If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
  */
 
-rootProject.name = "AdvanceRailway"
+package dev.nikomaru.advancerailway.utils.command
 
-pluginManagement {
-    repositories {
-        gradlePluginPortal()
-        maven("https://papermc.io/repo/repository/maven-public/")
-    }
+import org.bukkit.command.CommandSender
+import revxrsal.commands.command.ExecutableCommand
+import revxrsal.commands.process.ValueResolver
+
+abstract class ValueParser<T: Any>: ValueResolver<T> {
+    abstract fun suggestions(args: List<String>, sender: CommandSender, command: ExecutableCommand): Set<String>
+
+    abstract override fun resolve(context: ValueResolver.ValueResolverContext): T
+
 }
