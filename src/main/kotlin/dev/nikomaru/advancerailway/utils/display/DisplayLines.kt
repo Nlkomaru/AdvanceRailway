@@ -46,13 +46,13 @@ class DisplayLines: KoinComponent {
         withContext(Dispatchers.async) {
             lines.forEach { line ->
                 val size = line.points.size
-                for (i in 0 until size - 1) {
-                    val point1 = line.points[i]
-                    val point2 = line.points[i + 1]
-                    val step = 0.3
-                    val distance = point1.distanceTo(point2)
-                    val perSecond = 8
-                    repeat(perSecond * 20) {
+                val perSecond = 2
+                repeat(perSecond * 20) {
+                    for (i in 0 until size - 1) {
+                        val point1 = line.points[i]
+                        val point2 = line.points[i + 1]
+                        val step = 0.3
+                        val distance = point1.distanceTo(point2)
                         target.forEach {
                             var current = point1
                             var count = 0
@@ -73,8 +73,9 @@ class DisplayLines: KoinComponent {
                                 }
                             }
                         }
-                        delay(1000 / perSecond.toLong())
+
                     }
+                    delay(1000 / perSecond.toLong())
                 }
             }
         }

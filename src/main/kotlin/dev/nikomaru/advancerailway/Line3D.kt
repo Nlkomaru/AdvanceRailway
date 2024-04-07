@@ -17,9 +17,6 @@ class Line3D(first: Point3D, second: Point3D) {
         points.add(second)
     }
 
-    fun addPoint(point: Point3D) {
-        points.add(point)
-    }
 
     fun removePoint(point: Point3D) {
         points.remove(point)
@@ -42,6 +39,19 @@ class Line3D(first: Point3D, second: Point3D) {
             }
         }
         return this
+    }
+
+    fun addPoint(point: Point3D) {
+        val lastLinesInclination = points[points.size - 2].getInclination(points.last())
+        val firstLinesInclination = points.last().getInclination(point)
+        if (points.last() != point) {
+            if (lastLinesInclination == firstLinesInclination) {
+                points = points.dropLast(1).toMutableList()
+                points.add(point)
+            } else {
+                points.add(point)
+            }
+        }
     }
 
     override fun toString(): String {

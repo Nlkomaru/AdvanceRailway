@@ -7,17 +7,17 @@
  * If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
  */
 
-rootProject.name = "AdvanceRailway"
+package dev.nikomaru.advancerailway.commands
 
+import dev.nikomaru.advancerailway.Point3D
+import org.bukkit.command.CommandSender
+import revxrsal.commands.annotation.Command
+import revxrsal.commands.annotation.Subcommand
 
-dependencyResolutionManagement {
-    defaultLibrariesExtensionName = "libs"
-}
+@Command("advancerailway", "ar")
+class RegisterCommand {
+    @Subcommand("register")
+    fun register(sender: CommandSender, name: String, startPoint: Point3D, directionPoint: Point3D, endPoint: Point3D) {
 
-
-pluginManagement {
-    repositories {
-        gradlePluginPortal()
-        maven("https://papermc.io/repo/repository/maven-public/")
     }
 }

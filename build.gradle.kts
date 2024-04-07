@@ -10,15 +10,15 @@
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 
 plugins {
-    id("java")
-    kotlin("jvm") version "1.9.22"
-    id("com.github.johnrengelman.shadow") version "8.1.1"
-    id("xyz.jpenilla.run-paper") version "2.2.3"
-    id("net.minecrell.plugin-yml.bukkit") version "0.6.0"
-    kotlin("plugin.serialization") version "1.9.22"
+    java
+    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.shadow)
+    alias(libs.plugins.run.paper)
+    alias(libs.plugins.plugin.yml)
 }
 
-group = "dev.nikomaru" //TODO need to change
+group = "dev.nikomaru"
 version = "1.0-SNAPSHOT"
 
 fun captureVersion(dependency: Dependency): String {
@@ -39,35 +39,28 @@ repositories {
 
 
 dependencies {
-    val paperVersion = "1.20.4-R0.1-SNAPSHOT"
-    val mccoroutineVersion = "2.14.0"
-    val lampVersion = "3.1.9"
-    val koinVersion = "3.5.3"
-    val coroutineVersion = "1.7.3"
-    val serializationVersion = "1.6.2"
-    val protocolLibVersion = "5.2.0-SNAPSHOT"
-    val junitVersion = "5.10.1"
-
-
-    compileOnly("io.papermc.paper:paper-api:$paperVersion")
-    compileOnly("xyz.jpenilla:squaremap-api:1.2.3")
+    compileOnly(libs.paper.api)
 
     library(kotlin("stdlib"))
 
-    implementation("com.github.Revxrsal.Lamp:common:$lampVersion")
-    implementation("com.github.Revxrsal.Lamp:bukkit:$lampVersion")
+    implementation(libs.lamp.common)
+    implementation(libs.lamp.bukkit)
 
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationVersion")
+    implementation(libs.kotlinx.serialization.json)
 
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion")
-    implementation("com.github.shynixn.mccoroutine:mccoroutine-bukkit-api:$mccoroutineVersion")
-    implementation("com.github.shynixn.mccoroutine:mccoroutine-bukkit-core:$mccoroutineVersion")
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.mccoroutine.bukkit.api)
+    implementation(libs.mccoroutine.bukkit.core)
 
-    implementation("io.insert-koin:koin-core:$koinVersion")
+    implementation(libs.koin.core)
 
-    compileOnly("com.comphenix.protocol:ProtocolLib:$protocolLibVersion")
+    compileOnly(libs.squaremap.api)
+    compileOnly(libs.protocolLib)
 
-    testImplementation("org.junit.jupiter:junit-jupiter:$junitVersion")
+    implementation(libs.arrow.core)
+    implementation(libs.arrow.fx.coroutines)
+
+    testImplementation(libs.junit.jupiter)
 }
 
 java {
@@ -107,7 +100,7 @@ bukkit {
     name = "AdvanceRailway"
     version = "miencraft_plugin_version"
     website = "https://github.com/Nlkomaru/AdvanceRailway"
-
+    depend = listOf("ProtocolLib", "squaremap")
     main = "$group.advancerailway.AdvanceRailway"
 
 

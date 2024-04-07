@@ -7,17 +7,8 @@
  * If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
  */
 
-rootProject.name = "AdvanceRailway"
+package dev.nikomaru.advancerailway.utils
 
-
-dependencyResolutionManagement {
-    defaultLibrariesExtensionName = "libs"
-}
-
-
-pluginManagement {
-    repositories {
-        gradlePluginPortal()
-        maven("https://papermc.io/repo/repository/maven-public/")
-    }
+enum class RailDetectError {
+    ATTACHED_TO_LIMIT, MULTIPLE_RAIL
 }

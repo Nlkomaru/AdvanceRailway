@@ -40,6 +40,11 @@ class LuminescenceShulker: KoinComponent {
         target.add(player)
     }
 
+    suspend fun clearBlocks() {
+        stop()
+        blocks.clear()
+    }
+
     suspend fun display() {
         withContext(Dispatchers.async) {
             blocks.forEach { location ->

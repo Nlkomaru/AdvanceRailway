@@ -9,6 +9,8 @@
 
 package dev.nikomaru.advancerailway
 
+import org.bukkit.Location
+import org.bukkit.World
 import kotlin.math.acos
 import kotlin.math.pow
 import kotlin.math.sqrt
@@ -24,6 +26,12 @@ class Point3D(val x: Double, val y: Double, val z: Double) {
         val z = point.z - this.z
         val r = sqrt(x.pow(2.0) + y.pow(2.0) + z.pow(2.0))
         return Pair(acos(x / r), acos(y / r))
+    }
+
+    fun toLocation(world: World) = Location(world, x, y, z)
+
+    fun getDiff(point: Point3D): Triple<Double, Double, Double> {
+        return Triple(point.x - x, point.y - y, point.z - z)
     }
 
     override fun toString(): String {
