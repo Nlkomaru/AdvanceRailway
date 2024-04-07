@@ -4,7 +4,7 @@ mccoroutineVersion = "2.14.0"
 lampVersion = "3.1.9"
 koinVersion = "3.5.3"
 coroutineVersion = "1.7.3"
-serializationVersion = "1.6.2"
+serializationVersion = "1.6.3"
 protocolLibVersion = "5.2.0-SNAPSHOT"
 junitVersion = "5.10.1"
 
