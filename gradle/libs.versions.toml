@@ -6,7 +6,7 @@ koinVersion = "3.5.3"
 coroutineVersion = "1.8.0"
 serializationVersion = "1.6.3"
 protocolLibVersion = "5.2.0-SNAPSHOT"
-junitVersion = "5.10.1"
+junitVersion = "5.10.2"
 
 [libraries]
 paper-api = { group = "io.papermc.paper", name = "paper-api", version.ref = "paperVersion" }
