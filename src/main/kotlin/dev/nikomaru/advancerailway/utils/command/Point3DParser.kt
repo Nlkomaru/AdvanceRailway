@@ -25,14 +25,15 @@ object Point3DParser: ValueParser<Point3D>() {
             return emptySet()
         }
         val loc = sender.location
-        val s = "${loc.x.toInt()} ${loc.y.toInt()} ${loc.z.toInt()}"
+        val s = "${loc.x.toInt()},${loc.y.toInt()},${loc.z.toInt()}"
         return setOf(s)
     }
 
     override fun resolve(context: ValueResolver.ValueResolverContext): Point3D {
-        val x = context.pop().toDoubleOrNull() ?: throw IllegalArgumentException("Invalid number")
-        val y = context.pop().toDoubleOrNull() ?: throw IllegalArgumentException("Invalid number")
-        val z = context.pop().toDoubleOrNull() ?: throw IllegalArgumentException("Invalid number")
+        val list = context.pop().split(",").map { it.toDouble() }
+        val x = list[0]
+        val y = list[1]
+        val z = list[2]
         return Point3D(x, y, z)
     }
 

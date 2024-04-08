@@ -10,17 +10,24 @@
 package dev.nikomaru.advancerailway.file.data
 
 import dev.nikomaru.advancerailway.Line3D
+import dev.nikomaru.advancerailway.Point3D
 import kotlinx.serialization.Serializable
 import java.awt.Color
-import java.util.*
 
 @Serializable
 data class RailwayData(
-    val uuid: @Serializable(with = UUIDSerializer::class) UUID,
     val name: String,
     val group: String,
     val color: @Serializable(with = ColorSerializer::class) Color,
     val lineType: LineType,
     val line: @Serializable(Line3DSerializer::class) Line3D,
-    val stations: Pair<@Serializable(UUIDSerializer::class) UUID, @Serializable(UUIDSerializer::class) UUID>
-)
+    val fromStation: @Serializable(StationNameSerializer::class) StationName,
+    val toStation: @Serializable(StationNameSerializer::class) StationName,
+    val startPoint: @Serializable(Point3DSerializer::class) Point3D,
+    val endPoint: @Serializable(Point3DSerializer::class) Point3D,
+    val directionPoint: @Serializable(Point3DSerializer::class) Point3D
+) {
+    fun toCommandString(): String {
+        return "advancerailway register $name ${fromStation.name} ${toStation.name} $startPoint $directionPoint $endPoint"
+    }
+}

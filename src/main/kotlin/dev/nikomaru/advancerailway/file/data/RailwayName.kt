@@ -7,8 +7,7 @@
  * If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
  */
 
-package dev.nikomaru.advancerailway.utils
+package dev.nikomaru.advancerailway.file.data
 
-enum class RailDetectError {
-    ATTACHED_TO_LIMIT, MULTIPLE_RAIL, NOT_FOUND_END_POINT
-}
+@JvmInline
+value class RailwayName(val name: String)

@@ -13,7 +13,6 @@ import com.comphenix.protocol.ProtocolLibrary
 import com.github.shynixn.mccoroutine.bukkit.SuspendingJavaPlugin
 import com.github.shynixn.mccoroutine.bukkit.registerSuspendingEvents
 import dev.nikomaru.advancerailway.commands.DetectCommand
-import dev.nikomaru.advancerailway.commands.DisplayLineCommand
 import dev.nikomaru.advancerailway.commands.HelpCommand
 import dev.nikomaru.advancerailway.commands.RegisterCommand
 import dev.nikomaru.advancerailway.file.FileLoader
@@ -94,7 +93,6 @@ open class AdvanceRailway: SuspendingJavaPlugin() {
 
         with(handler) {
             register(HelpCommand())
-            register(DisplayLineCommand())
             register(RegisterCommand())
             register(DetectCommand())
         }
