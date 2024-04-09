@@ -9,5 +9,12 @@
 
 package dev.nikomaru.advancerailway.file.data
 
-@JvmInline
-value class RailwayName(val name: String)
+import dev.nikomaru.advancerailway.file.utils.ColorSerializer
+import kotlinx.serialization.Serializable
+import java.awt.Color
+
+data class GroupData(
+    val groupId: String,
+    val groupName: String,
+    val railwayColor: @Serializable(with = ColorSerializer::class) Color,
+)

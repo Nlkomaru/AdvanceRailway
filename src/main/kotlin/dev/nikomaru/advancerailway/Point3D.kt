@@ -9,12 +9,15 @@
 
 package dev.nikomaru.advancerailway
 
+import dev.nikomaru.advancerailway.file.utils.Point3DSerializer
+import kotlinx.serialization.Serializable
 import org.bukkit.Location
 import org.bukkit.World
 import kotlin.math.acos
 import kotlin.math.pow
 import kotlin.math.sqrt
 
+@Serializable(with = Point3DSerializer::class)
 class Point3D(val x: Double, val y: Double, val z: Double) {
     fun distanceTo(point: Point3D): Double {
         return sqrt((point.x - x).pow(2.0) + (point.y - y).pow(2.0) + (point.z - z).pow(2.0))

@@ -9,15 +9,23 @@
 
 package dev.nikomaru.advancerailway.commands
 
-import dev.nikomaru.advancerailway.Point3D
+import dev.nikomaru.advancerailway.AdvanceRailway
 import org.bukkit.command.CommandSender
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import revxrsal.commands.annotation.Command
 import revxrsal.commands.annotation.Subcommand
 
-@Command("advancerailway railway", "ar railway")
-class RegisterCommand {
-    @Subcommand("register")
-    fun register(sender: CommandSender, name: String, startPoint: Point3D, directionPoint: Point3D, endPoint: Point3D) {
+@Command("ar", "advancerailway")
+class InfoCommand: KoinComponent {
+    val plugin: AdvanceRailway by inject()
+
+    @Subcommand("info")
+    fun info(sender: CommandSender) {
+        sender.sendMessage("AdvanceRailway Information")
+        sender.sendMessage("Version: ${plugin.pluginMeta.version}")
+        sender.sendMessage("Author: ${plugin.pluginMeta.authors.joinToString(",")}")
+        sender.sendMessage("Website: ${plugin.pluginMeta.website}")
 
     }
 }

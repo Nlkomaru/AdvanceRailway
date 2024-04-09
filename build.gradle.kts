@@ -102,6 +102,7 @@ bukkit {
     website = "https://github.com/Nlkomaru/AdvanceRailway"
     depend = listOf("ProtocolLib", "squaremap")
     main = "$group.advancerailway.AdvanceRailway"
+    authors = listOf("Nikomaru")
 
 
     apiVersion = "1.20"

@@ -36,10 +36,10 @@ plugins:
       docs_structure: folder
       languages:
         - locale: en
-          default: true
           name: English
           build: true
         - locale: ja
+          default: true
           name: 日本語
           build: true
 repo_url: https://github.com/Nlkomaru/AdvanceRailway

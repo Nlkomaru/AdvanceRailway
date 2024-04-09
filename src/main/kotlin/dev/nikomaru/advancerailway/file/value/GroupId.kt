@@ -7,9 +7,10 @@
  * If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
  */
 
-package dev.nikomaru.advancerailway.file.data
+package dev.nikomaru.advancerailway.file.value
 
 import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
 import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
@@ -17,16 +18,17 @@ import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 
 @JvmInline
-value class StationName(val name: String)
+@Serializable(with = GroupNameSerializer::class)
+value class GroupId(val name: String)
 
-object StationNameSerializer: KSerializer<StationName> {
-    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("StationName", PrimitiveKind.STRING)
+object GroupNameSerializer: KSerializer<GroupId> {
+    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("RailwayName", PrimitiveKind.STRING)
 
-    override fun serialize(encoder: Encoder, value: StationName) {
+    override fun serialize(encoder: Encoder, value: GroupId) {
         encoder.encodeString(value.name)
     }
 
-    override fun deserialize(decoder: Decoder): StationName {
-        return StationName(decoder.decodeString())
+    override fun deserialize(decoder: Decoder): GroupId {
+        return GroupId(decoder.decodeString())
     }
 }

@@ -9,6 +9,10 @@
 
 package dev.nikomaru.advancerailway
 
+import dev.nikomaru.advancerailway.file.utils.Line3DSerializer
+import kotlinx.serialization.Serializable
+
+@Serializable(with = Line3DSerializer::class)
 class Line3D(first: Point3D, second: Point3D) {
     var points = mutableListOf<Point3D>()
 

@@ -10,15 +10,17 @@
 package dev.nikomaru.advancerailway.file.data
 
 import dev.nikomaru.advancerailway.Point3D
+import dev.nikomaru.advancerailway.file.utils.ColorSerializer
+import dev.nikomaru.advancerailway.file.value.StationId
 import kotlinx.serialization.Serializable
 import java.awt.Color
-import java.util.*
 
 @Serializable
 data class StationData(
-    val uuid: @Serializable(with = UUIDSerializer::class) UUID,
+    val id: StationId,
     val name: String,
-    val group: String,
-    val color: @Serializable(with = ColorSerializer::class) Color,
-    val point: @Serializable(with = Point3DSerializer::class) Point3D
+    val numbering: String?,
+    val point: Point3D,
+    val overrideSize: Double?,
+    val color: @Serializable(with = ColorSerializer::class) Color?,
 )

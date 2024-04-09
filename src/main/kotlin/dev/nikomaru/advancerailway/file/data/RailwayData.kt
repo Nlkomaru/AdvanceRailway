@@ -11,23 +11,26 @@ package dev.nikomaru.advancerailway.file.data
 
 import dev.nikomaru.advancerailway.Line3D
 import dev.nikomaru.advancerailway.Point3D
+import dev.nikomaru.advancerailway.file.value.GroupId
+import dev.nikomaru.advancerailway.file.value.RailwayId
+import dev.nikomaru.advancerailway.file.value.StationId
 import kotlinx.serialization.Serializable
-import java.awt.Color
 
 @Serializable
 data class RailwayData(
-    val name: String,
-    val group: String,
-    val color: @Serializable(with = ColorSerializer::class) Color,
+    val id: RailwayId,
+    val group: GroupId?,
+
     val lineType: LineType,
-    val line: @Serializable(Line3DSerializer::class) Line3D,
-    val fromStation: @Serializable(StationNameSerializer::class) StationName,
-    val toStation: @Serializable(StationNameSerializer::class) StationName,
-    val startPoint: @Serializable(Point3DSerializer::class) Point3D,
-    val endPoint: @Serializable(Point3DSerializer::class) Point3D,
-    val directionPoint: @Serializable(Point3DSerializer::class) Point3D
+    val line: Line3D,
+    val fromStation: StationId,
+    val toStation: StationId,
+    val timeRequired: Long, //秒
+    val startPoint: Point3D,
+    val endPoint: Point3D,
+    val directionPoint: Point3D
 ) {
     fun toCommandString(): String {
-        return "advancerailway register $name ${fromStation.name} ${toStation.name} $startPoint $directionPoint $endPoint"
+        return "ar register ${id.name} $startPoint $directionPoint $endPoint"
     }
 }
