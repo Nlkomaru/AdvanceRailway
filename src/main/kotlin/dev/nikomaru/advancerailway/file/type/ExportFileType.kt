@@ -7,17 +7,8 @@
  * If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
  */
 
-package dev.nikomaru.advancerailway.commands
+package dev.nikomaru.advancerailway.file.type
 
-import dev.nikomaru.advancerailway.Point3D
-import org.bukkit.command.CommandSender
-import revxrsal.commands.annotation.Command
-import revxrsal.commands.annotation.Subcommand
-
-@Command("advancerailway railway", "ar railway")
-class RegisterCommand {
-    @Subcommand("register")
-    fun register(sender: CommandSender, name: String, startPoint: Point3D, directionPoint: Point3D, endPoint: Point3D) {
-
-    }
+enum class ExportFileType {
+    JSON, CSV
 }

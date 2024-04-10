@@ -12,13 +12,12 @@ package dev.nikomaru.advancerailway
 import com.comphenix.protocol.ProtocolLibrary
 import com.github.shynixn.mccoroutine.bukkit.SuspendingJavaPlugin
 import com.github.shynixn.mccoroutine.bukkit.registerSuspendingEvents
-import dev.nikomaru.advancerailway.commands.DetectCommand
-import dev.nikomaru.advancerailway.commands.HelpCommand
-import dev.nikomaru.advancerailway.commands.RegisterCommand
+import dev.nikomaru.advancerailway.commands.railway.RailwayCommand
 import dev.nikomaru.advancerailway.file.FileLoader
 import dev.nikomaru.advancerailway.listener.RailClickEvent
 import dev.nikomaru.advancerailway.utils.command.Point3DParser.registerPoint3DParser
 import org.bukkit.Bukkit
+import org.bukkit.command.defaults.HelpCommand
 import org.koin.core.context.GlobalContext
 import org.koin.core.context.loadKoinModules
 import org.koin.dsl.module
@@ -92,9 +91,7 @@ open class AdvanceRailway: SuspendingJavaPlugin() {
         handler.registerPoint3DParser()
 
         with(handler) {
-            register(HelpCommand())
-            register(RegisterCommand())
-            register(DetectCommand())
+            register(HelpCommand(), RailwayCommand())
         }
     }
 

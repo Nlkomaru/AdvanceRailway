@@ -7,16 +7,43 @@
 
 # コマンドリスト
 
-- [x] `ar detect` クリックした線路の終点を検出します。
+## 一般
+
+- [x] `ar inspect` クリックした線路の終点を検出します。
 - [x] `ar help` ヘルプを表示します。
-- [ ] `ar info` プラグインの情報を表示します。
-- [ ] `ar info-r <railwayName>` 路線の情報を表示します。
-- [ ] `ar info-s <stationName>` 駅の情報を表示します。
-- [ ] `ar list-r` 路線の一覧を表示します。
-- [ ] `ar list-s` 駅の一覧を表示します。
-- [ ] `ar register-s <id> <name> [point]` 駅を登録します。 pointがない場合はプレイヤーの位置に登録されます。
-- [ ] `ar register-r <id> <start> <direction> <end>` 路線を登録します。
-- [ ] `ar reload` マップを再読み込みします。
+- [x] `ar info` プラグインの情報を表示します。
+- [x] `ar reload` マップ及び設定をリロードします。
+- [ ] `ar export <type>` マップデータをエクスポートします。 type は `json` か `csv` です。
+
+## 路線
+
+- [ ] `ar railway add <railwayId> <railwayName> <start> <direction> <end>` 路線を追加します。
+- [ ] `ar railway update <railwayId> <start> <direction> <end>` 路線の始点と終点を変更します。
+- [ ] `ar railway remove <railwayId>` 路線を削除します。
+- [ ] `ar railway rename <railwayId> <oldName> <newName>` 路線の名前を変更します。
+- [ ] `ar railway group set <railwayId> <groupId>` 路線のグループを変更します。
+- [ ] `ar railway group unset <railwayId> <stationId>` 路線のグループを削除します。
+- [ ] `ar railway from-station <railwayId> <fromStation>` 路線の始点駅を変更します。
+- [ ] `ar railway to-station <railwayId> <toStation>` 路線の終点駅を変更します。
+- [ ] `ar railway info <railwayId>` 路線の情報を表示します。
+- [ ] `ar railway list` 路線の一覧を表示します。
+
+## 駅
+
+- [ ] `ar station add <stationId> <stationName> [point]` 駅を追加します。 pointがない場合はプレイヤーの位置に追加されます。
+- [ ] `ar station remove <stationId>` 駅を削除します。
+- [ ] `ar station rename <stationId> <oldName> <newName>` 駅の名前を変更します。
+- [ ] `ar station set <stationId> <point>` 駅の座標を変更します。
+- [ ] `ar station info <stationId>` 駅の情報を表示します。
+- [ ] `ar station list` 駅の一覧を表示します。
+
+## グループ
+
+- [ ] `ar group add <groupId> <groupName>` グループを追加します。
+- [ ] `ar group remove <groupId>` グループを削除します。
+- [ ] `ar group rename <groupId> <oldName> <newName>` グループの名前を変更します。
+- [ ] `ar group info <groupId>` グループの情報を表示します。
+- [ ] `ar group list` グループの一覧を表示します。
 
 路線名はかざしたとき
 駅名は切り換えれるように

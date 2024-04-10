@@ -7,21 +7,21 @@
  * If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
  */
 
-package dev.nikomaru.advancerailway.commands
+package dev.nikomaru.advancerailway.commands.railway
 
+import dev.nikomaru.advancerailway.Point3D
 import org.bukkit.command.CommandSender
 import revxrsal.commands.annotation.Command
-import revxrsal.commands.annotation.Default
-import revxrsal.commands.annotation.Description
 import revxrsal.commands.annotation.Subcommand
-import revxrsal.commands.help.CommandHelp
 
-@Command("advancerailway", "ar")
-class HelpCommand {
-    @Subcommand("help")
-    @Description("Shows the help menu")
-    fun help(sender: CommandSender, helpEntries: CommandHelp<String>, @Default("1") page: Int) {
-        for (entry in helpEntries.paginate(page, 7))  // 7 entries per page
-            sender.sendRichMessage(entry)
+@Command("advancerailway railway", "ar railway")
+class RailwayCommand {
+    @Subcommand("register")
+    fun register(
+        sender: CommandSender, id: String, name: String, startPoint: Point3D, directionPoint: Point3D, endPoint: Point3D
+    ) {
+        sender.sendMessage("Registering railway...")
+
     }
+
 }

@@ -14,4 +14,8 @@ object FileLoader {
         RailwayDataLoader().load()
         StationDataLoader().load()
     }
+
+    fun export() {
+        TODO("Not yet implemented")
+    }
 }
