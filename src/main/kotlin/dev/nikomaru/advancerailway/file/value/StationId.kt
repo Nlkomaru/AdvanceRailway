@@ -19,13 +19,13 @@ import kotlinx.serialization.encoding.Encoder
 
 @JvmInline
 @Serializable(with = StationNameSerializer::class)
-value class StationId(val name: String)
+value class StationId(val value: String)
 
 object StationNameSerializer: KSerializer<StationId> {
     override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("StationName", PrimitiveKind.STRING)
 
     override fun serialize(encoder: Encoder, value: StationId) {
-        encoder.encodeString(value.name)
+        encoder.encodeString(value.value)
     }
 
     override fun deserialize(decoder: Decoder): StationId {

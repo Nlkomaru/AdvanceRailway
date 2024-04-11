@@ -9,10 +9,15 @@
 
 package dev.nikomaru.advancerailway.file
 
+import dev.nikomaru.advancerailway.file.loader.ConfigDataLoader
+import dev.nikomaru.advancerailway.file.loader.RailwayDataLoader
+import dev.nikomaru.advancerailway.file.loader.StationDataLoader
+
 object FileLoader {
     fun load() {
         RailwayDataLoader().load()
         StationDataLoader().load()
+        ConfigDataLoader().load()
     }
 
     fun export() {

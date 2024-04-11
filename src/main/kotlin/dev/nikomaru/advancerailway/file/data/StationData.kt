@@ -11,8 +11,10 @@ package dev.nikomaru.advancerailway.file.data
 
 import dev.nikomaru.advancerailway.Point3D
 import dev.nikomaru.advancerailway.file.utils.ColorSerializer
+import dev.nikomaru.advancerailway.file.utils.WorldSerializer
 import dev.nikomaru.advancerailway.file.value.StationId
 import kotlinx.serialization.Serializable
+import org.bukkit.World
 import java.awt.Color
 
 @Serializable
@@ -20,6 +22,7 @@ data class StationData(
     val id: StationId,
     val name: String,
     val numbering: String?,
+    val world: @Serializable(with = WorldSerializer::class) World,
     val point: Point3D,
     val overrideSize: Double?,
     val color: @Serializable(with = ColorSerializer::class) Color?,

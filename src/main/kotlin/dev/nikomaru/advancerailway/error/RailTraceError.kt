@@ -7,8 +7,8 @@
  * If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
  */
 
-package dev.nikomaru.advancerailway.utils
+package dev.nikomaru.advancerailway.error
 
-enum class RailDetectError {
+enum class RailTraceError {
     ATTACHED_TO_LIMIT, MULTIPLE_RAIL, NOT_FOUND_END_POINT
 }

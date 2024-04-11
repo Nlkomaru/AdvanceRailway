@@ -12,16 +12,16 @@ package dev.nikomaru.advancerailway.file.data
 import dev.nikomaru.advancerailway.Line3D
 import dev.nikomaru.advancerailway.Point3D
 import dev.nikomaru.advancerailway.file.type.LineType
+import dev.nikomaru.advancerailway.file.utils.WorldSerializer
 import dev.nikomaru.advancerailway.file.value.GroupId
 import dev.nikomaru.advancerailway.file.value.RailwayId
 import dev.nikomaru.advancerailway.file.value.StationId
 import kotlinx.serialization.Serializable
+import org.bukkit.World
 
 @Serializable
 data class RailwayData(
-    val id: RailwayId,
-    val group: GroupId?,
-
+    val id: RailwayId, val group: GroupId?, val world: @Serializable(with = WorldSerializer::class) World,
     val lineType: LineType,
     val line: Line3D,
     val fromStation: StationId,
@@ -32,6 +32,6 @@ data class RailwayData(
     val directionPoint: Point3D
 ) {
     fun toCommandString(): String {
-        return "ar register ${id.name} $startPoint $directionPoint $endPoint"
+        return "ar register ${id.value} $startPoint $directionPoint $endPoint"
     }
 }

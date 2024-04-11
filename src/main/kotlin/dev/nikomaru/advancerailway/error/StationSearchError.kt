@@ -7,15 +7,8 @@
  * If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
  */
 
-package dev.nikomaru.advancerailway.file.data
+package dev.nikomaru.advancerailway.error
 
-import dev.nikomaru.advancerailway.file.utils.ColorSerializer
-import kotlinx.serialization.Serializable
-import java.awt.Color
-
-@Serializable
-data class GroupData(
-    val groupId: String,
-    val groupName: String,
-    val railwayColor: @Serializable(with = ColorSerializer::class) Color,
-)
+enum class StationSearchError {
+    NOT_FOUND_STATION
+}

@@ -9,7 +9,9 @@
 
 package dev.nikomaru.advancerailway.utils
 
+import dev.nikomaru.advancerailway.Point3D
 import kotlinx.serialization.json.Json
+import org.bukkit.Location
 
 object Utils {
     val json = Json {
@@ -18,4 +20,10 @@ object Utils {
         encodeDefaults = true
         prettyPrint = true
     }
+
+    fun Location.toPoint3D() = Point3D(x, y, z)
+
+    private fun Triple<Int, Int, Int>.toPoint3D() = Point3D(first.toDouble(), second.toDouble(), third.toDouble())
+
+    fun Point3D.toLocation(world: org.bukkit.World) = Location(world, x, y, z)
 }

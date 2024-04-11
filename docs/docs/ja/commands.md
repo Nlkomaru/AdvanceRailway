@@ -17,14 +17,15 @@
 
 ## 路線
 
-- [ ] `ar railway add <railwayId> <railwayName> <start> <direction> <end>` 路線を追加します。
-- [ ] `ar railway update <railwayId> <start> <direction> <end>` 路線の始点と終点を変更します。
+- [x] `ar railway add <railwayId> <railwayName> <start> <direction> <end>` 路線を追加します。
+- [x] `ar railway update <railwayId> <start> <direction> <end>` 路線の始点と終点を変更します。
 - [ ] `ar railway remove <railwayId>` 路線を削除します。
-- [ ] `ar railway rename <railwayId> <oldName> <newName>` 路線の名前を変更します。
-- [ ] `ar railway group set <railwayId> <groupId>` 路線のグループを変更します。
-- [ ] `ar railway group unset <railwayId> <stationId>` 路線のグループを削除します。
-- [ ] `ar railway from-station <railwayId> <fromStation>` 路線の始点駅を変更します。
-- [ ] `ar railway to-station <railwayId> <toStation>` 路線の終点駅を変更します。
+- [ ] `ar railway set name <railwayId> <oldName> <newName>` 路線の名前を変更します。
+- [ ] `ar railway set lineType <railwayId> <lineType>` 路線の色を変更します。
+- [ ] `ar railway set group <railwayId> <groupId>` 路線のグループを変更します。
+- [ ] `ar railway unset group <railwayId> <stationId>` 路線のグループを削除します。
+- [ ] `ar railway set from-station <railwayId> <fromStation>` 路線の始点駅を変更します。
+- [ ] `ar railway set to-station <railwayId> <toStation>` 路線の終点駅を変更します。
 - [ ] `ar railway info <railwayId>` 路線の情報を表示します。
 - [ ] `ar railway list` 路線の一覧を表示します。
 

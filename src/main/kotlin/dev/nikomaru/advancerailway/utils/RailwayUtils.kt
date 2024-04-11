@@ -15,17 +15,24 @@ import arrow.core.right
 import dev.nikomaru.advancerailway.AdvanceRailway
 import dev.nikomaru.advancerailway.Line3D
 import dev.nikomaru.advancerailway.Point3D
+import dev.nikomaru.advancerailway.error.RailTraceError
+import dev.nikomaru.advancerailway.file.data.ConfigData
+import dev.nikomaru.advancerailway.file.data.RailwayData
+import dev.nikomaru.advancerailway.utils.Utils.json
+import dev.nikomaru.advancerailway.utils.coroutines.async
 import dev.nikomaru.advancerailway.utils.coroutines.minecraft
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import kotlinx.serialization.encodeToString
 import org.bukkit.Bukkit
-import org.bukkit.Location
 import org.bukkit.block.data.Rail
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-object RailUtils: KoinComponent {
+object RailwayUtils: KoinComponent {
     val plugin: AdvanceRailway by inject()
+    val config: ConfigData by inject()
+
     fun getRailAvailableDirection(point: Point3D): List<Triple<Int, Int, Int>> {
         val location = point.toLocation(Bukkit.getWorld("world")!!)
         val state = (location.block.blockData as Rail).shape
@@ -94,13 +101,13 @@ object RailUtils: KoinComponent {
 
     suspend fun railFinishDetect(
         first: Point3D, directionPoint: Point3D
-    ): Either<RailDetectError, Point3D> = withContext(Dispatchers.minecraft) {
+    ): Either<RailTraceError, Point3D> = withContext(Dispatchers.minecraft) {
         var previousPoint = first
         var currentPoint = directionPoint
         var count = 0
         val line = Line3D(first, directionPoint)
 
-        while (count < 10000) {
+        while (count < config.limit) {
             val diff = previousPoint.getDiff(currentPoint)
             val list = getRailAvailableDirection(currentPoint).toMutableList()
             list.removeIf {
@@ -114,7 +121,7 @@ object RailUtils: KoinComponent {
                 return@withContext currentPoint.right()
             }
             if (rails.size > 1) {
-                return@withContext RailDetectError.MULTIPLE_RAIL.left()
+                return@withContext RailTraceError.MULTIPLE_RAIL.left()
             }
             previousPoint = currentPoint
             currentPoint = rails.first()
@@ -124,9 +131,50 @@ object RailUtils: KoinComponent {
             }
             count++
         }
-        return@withContext RailDetectError.ATTACHED_TO_LIMIT.left()
+        return@withContext RailTraceError.ATTACHED_TO_LIMIT.left()
     }
 
-    fun Location.toPoint3D() = Point3D(x, y, z)
-    private fun Triple<Int, Int, Int>.toPoint3D() = Point3D(first.toDouble(), second.toDouble(), third.toDouble())
+    suspend fun getLine(
+        startPoint: Point3D, directionPoint: Point3D, endPoint: Point3D
+    ): Either<RailTraceError, Line3D> = withContext(Dispatchers.async) {
+        var previousPoint = startPoint
+        var currentPoint = directionPoint
+        var count = 0
+        val line = Line3D(startPoint, directionPoint)
+        while (count < config.limit) {
+            val diff = previousPoint.getDiff(currentPoint)
+            val list = getRailAvailableDirection(currentPoint).toMutableList()
+            list.removeIf {
+                it.first == -diff.first.toInt() && it.second == -diff.second.toInt() && it.third == -diff.third.toInt()
+            }
+            val nextPoint = list.map { (x, y, z) ->
+                Point3D(currentPoint.x + x, currentPoint.y + y, currentPoint.z + z)
+            }
+            val rails = nextPoint.filter { it.toLocation(Bukkit.getWorld("world")!!).block.blockData is Rail }
+            if (rails.isEmpty()) {
+                return@withContext RailTraceError.NOT_FOUND_END_POINT.left()
+            }
+            if (rails.size > 1) {
+                return@withContext RailTraceError.MULTIPLE_RAIL.left()
+            }
+            previousPoint = currentPoint
+            currentPoint = rails.first()
+            if (currentPoint == endPoint) {
+                line.addPoint(currentPoint)
+                return@withContext line.right()
+            }
+            if (count % 2 == 0) {
+                line.addPoint(currentPoint)
+            }
+            count++
+        }
+        return@withContext RailTraceError.ATTACHED_TO_LIMIT.left()
+    }
+
+
+    fun writeRailwayData(railwayData: RailwayData) {
+        val file = plugin.dataFolder.resolve("data").resolve("railway").resolve("${railwayData.id.value}.json")
+        file.writeText(json.encodeToString(railwayData))
+    }
+
 }

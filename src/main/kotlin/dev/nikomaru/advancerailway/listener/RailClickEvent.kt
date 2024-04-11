@@ -11,8 +11,8 @@ package dev.nikomaru.advancerailway.listener
 
 import arrow.core.Either
 import dev.nikomaru.advancerailway.Point3D
-import dev.nikomaru.advancerailway.utils.RailUtils
-import dev.nikomaru.advancerailway.utils.RailUtils.railFinishDetect
+import dev.nikomaru.advancerailway.utils.RailwayUtils
+import dev.nikomaru.advancerailway.utils.RailwayUtils.railFinishDetect
 import dev.nikomaru.advancerailway.utils.coroutines.async
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -47,7 +47,8 @@ class RailClickEvent: Listener {
             val locate = block.location
             val startPoint = locate.let { Point3D(it.x, it.y, it.z) }
             val availableLocations =
-                RailUtils.getRailAvailableDirection(block.location.let { Point3D(it.x, it.y, it.z) }).map { (x, y, z) ->
+                RailwayUtils.getRailAvailableDirection(block.location.let { Point3D(it.x, it.y, it.z) })
+                    .map { (x, y, z) ->
                     locate.clone().add(x.toDouble(), y.toDouble(), z.toDouble())
                 }
             val detectedRailLocations = availableLocations.filter { it.block.blockData is Rail }

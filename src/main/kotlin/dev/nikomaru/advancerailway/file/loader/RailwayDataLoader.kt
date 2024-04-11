@@ -7,7 +7,7 @@
  * If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
  */
 
-package dev.nikomaru.advancerailway.file
+package dev.nikomaru.advancerailway.file.loader
 
 import dev.nikomaru.advancerailway.AdvanceRailway
 import dev.nikomaru.advancerailway.file.data.RailwayData
@@ -30,7 +30,7 @@ class RailwayDataLoader: KoinComponent {
         }
         dataFolder.listFiles()?.forEach { file ->
             val data = json.decodeFromString<RailwayData>(file.readText())
-            val key = Key.of(data.uuid.toString())
+            val key = Key.of(data.id.value)
             val marker = Marker.multiPolyline(data.line.points.map { Point.of(it.x, it.y) })
             provider.addMarker(key, marker)
         }

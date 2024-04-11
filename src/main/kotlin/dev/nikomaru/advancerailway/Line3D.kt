@@ -58,6 +58,14 @@ class Line3D(first: Point3D, second: Point3D) {
         }
     }
 
+    fun getLength(): Double {
+        var length = 0.0
+        for (i in 0 until points.size - 1) {
+            length += points[i].distanceTo(points[i + 1])
+        }
+        return length
+    }
+
     override fun toString(): String {
         return "Line3D(points=$points)"
     }

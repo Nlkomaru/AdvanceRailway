@@ -90,3 +90,15 @@ object ColorSerializer: KSerializer<Color> {
         encoder.encodeString("${value.red},${value.green},${value.blue}")
     }
 }
+
+object WorldSerializer: KSerializer<org.bukkit.World> {
+    override val descriptor = PrimitiveSerialDescriptor("World", PrimitiveKind.STRING)
+
+    override fun deserialize(decoder: Decoder): org.bukkit.World {
+        return Bukkit.getWorld(decoder.decodeString())!!
+    }
+
+    override fun serialize(encoder: Encoder, value: org.bukkit.World) {
+        encoder.encodeString(value.name)
+    }
+}

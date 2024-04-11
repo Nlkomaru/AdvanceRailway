@@ -9,19 +9,4 @@
 
 package dev.nikomaru.advancerailway.commands.railway
 
-import dev.nikomaru.advancerailway.Point3D
-import org.bukkit.command.CommandSender
-import revxrsal.commands.annotation.Command
-import revxrsal.commands.annotation.Subcommand
-
-@Command("advancerailway railway", "ar railway")
-class RailwayCommand {
-    @Subcommand("register")
-    fun register(
-        sender: CommandSender, id: String, name: String, startPoint: Point3D, directionPoint: Point3D, endPoint: Point3D
-    ) {
-        sender.sendMessage("Registering railway...")
-
-    }
-
-}
+class RailwayEditCommand
