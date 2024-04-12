@@ -18,12 +18,12 @@ import dev.nikomaru.advancerailway.Point3D
 import dev.nikomaru.advancerailway.error.RailTraceError
 import dev.nikomaru.advancerailway.file.data.ConfigData
 import dev.nikomaru.advancerailway.file.data.RailwayData
+import dev.nikomaru.advancerailway.file.value.RailwayId
 import dev.nikomaru.advancerailway.utils.Utils.json
 import dev.nikomaru.advancerailway.utils.coroutines.async
 import dev.nikomaru.advancerailway.utils.coroutines.minecraft
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import kotlinx.serialization.encodeToString
 import org.bukkit.Bukkit
 import org.bukkit.block.data.Rail
 import org.koin.core.component.KoinComponent
@@ -172,9 +172,12 @@ object RailwayUtils: KoinComponent {
     }
 
 
-    fun writeRailwayData(railwayData: RailwayData) {
-        val file = plugin.dataFolder.resolve("data").resolve("railway").resolve("${railwayData.id.value}.json")
-        file.writeText(json.encodeToString(railwayData))
+    fun getRailwayData(railwayId: RailwayId): RailwayData? {
+        val file = plugin.dataFolder.resolve("data").resolve("railways").resolve("${railwayId.value}.json")
+        if (!file.exists()) {
+            return null
+        }
+        return json.decodeFromString<RailwayData>(file.readText())
     }
 
 }

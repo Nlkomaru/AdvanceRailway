@@ -19,13 +19,13 @@ import kotlinx.serialization.encoding.Encoder
 
 @JvmInline
 @Serializable(with = GroupNameSerializer::class)
-value class GroupId(val name: String)
+value class GroupId(val value: String)
 
 object GroupNameSerializer: KSerializer<GroupId> {
     override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("RailwayName", PrimitiveKind.STRING)
 
     override fun serialize(encoder: Encoder, value: GroupId) {
-        encoder.encodeString(value.name)
+        encoder.encodeString(value.value)
     }
 
     override fun deserialize(decoder: Decoder): GroupId {

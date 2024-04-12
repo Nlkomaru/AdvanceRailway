@@ -74,8 +74,7 @@ class RailwayMainCommand {
             endPoint = endPoint,
             directionPoint = directionPoint
         )
-
-        RailwayUtils.writeRailwayData(railwayData)
+        railwayData.save()
         sender.sendMessage("$action railway: $railwayId")
     }
 }

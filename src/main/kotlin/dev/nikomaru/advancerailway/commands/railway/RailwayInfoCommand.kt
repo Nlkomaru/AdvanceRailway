@@ -9,4 +9,37 @@
 
 package dev.nikomaru.advancerailway.commands.railway
 
-class RailwayInfoCommand
+import dev.nikomaru.advancerailway.AdvanceRailway
+import dev.nikomaru.advancerailway.file.value.RailwayId
+import dev.nikomaru.advancerailway.utils.RailwayUtils
+import org.bukkit.command.CommandSender
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
+import revxrsal.commands.annotation.Command
+import revxrsal.commands.annotation.Subcommand
+import kotlin.math.ceil
+
+@Command("ar railway", "advancerailway railway")
+class RailwayInfoCommand: KoinComponent {
+    val plugin: AdvanceRailway by inject()
+
+    @Subcommand("info")
+    fun info(sender: CommandSender, railwayId: RailwayId) {
+        val data = RailwayUtils.getRailwayData(railwayId) ?: run {
+            sender.sendMessage("Railway not found")
+            return
+        }
+        sender.sendMessage("Railway ID: ${data.id.value}")
+        sender.sendMessage("Railway Stations: ${data.toStation} -> ${data.fromStation}")
+        sender.sendMessage("Railway Length: ${ceil(data.timeRequired / 6.0) / 10} minutes")
+    }
+
+    @Subcommand("list")
+    fun list(sender: CommandSender) {
+        val list = plugin.dataFolder.resolve("data").resolve("railways").listFiles()?.map { it.nameWithoutExtension }
+            ?: emptyList()
+        list.forEach {
+            sender.sendMessage(it)
+        }
+    }
+}

@@ -9,6 +9,7 @@
 
 package dev.nikomaru.advancerailway.file.data
 
+import dev.nikomaru.advancerailway.AdvanceRailway
 import dev.nikomaru.advancerailway.Line3D
 import dev.nikomaru.advancerailway.Point3D
 import dev.nikomaru.advancerailway.file.type.LineType
@@ -16,8 +17,12 @@ import dev.nikomaru.advancerailway.file.utils.WorldSerializer
 import dev.nikomaru.advancerailway.file.value.GroupId
 import dev.nikomaru.advancerailway.file.value.RailwayId
 import dev.nikomaru.advancerailway.file.value.StationId
+import dev.nikomaru.advancerailway.utils.Utils.json
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.encodeToString
 import org.bukkit.World
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
 @Serializable
 data class RailwayData(
@@ -30,7 +35,14 @@ data class RailwayData(
     val startPoint: Point3D,
     val endPoint: Point3D,
     val directionPoint: Point3D
-) {
+): KoinComponent {
+    val plugin: AdvanceRailway by inject()
+
+    fun save() {
+        val file = plugin.dataFolder.resolve("data").resolve("railways").resolve("${id.value}.json")
+        file.writeText(json.encodeToString(this))
+    }
+
     fun toCommandString(): String {
         return "ar register ${id.value} $startPoint $directionPoint $endPoint"
     }

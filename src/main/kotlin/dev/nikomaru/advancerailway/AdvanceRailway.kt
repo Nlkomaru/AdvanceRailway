@@ -12,12 +12,18 @@ package dev.nikomaru.advancerailway
 import com.comphenix.protocol.ProtocolLibrary
 import com.github.shynixn.mccoroutine.bukkit.SuspendingJavaPlugin
 import com.github.shynixn.mccoroutine.bukkit.registerSuspendingEvents
+import dev.nikomaru.advancerailway.commands.GeneralCommand
+import dev.nikomaru.advancerailway.commands.railway.RailwayEditCommand
+import dev.nikomaru.advancerailway.commands.railway.RailwayInfoCommand
 import dev.nikomaru.advancerailway.commands.railway.RailwayMainCommand
+import dev.nikomaru.advancerailway.commands.station.StationMainCommand
 import dev.nikomaru.advancerailway.file.FileLoader
 import dev.nikomaru.advancerailway.listener.RailClickEvent
+import dev.nikomaru.advancerailway.utils.command.GroupIdParser.registerGroupIdParser
 import dev.nikomaru.advancerailway.utils.command.Point3DParser.registerPoint3DParser
+import dev.nikomaru.advancerailway.utils.command.RailwayIdParser.registerRailwayIdParser
+import dev.nikomaru.advancerailway.utils.command.StationIdParser.registerStationIdParser
 import org.bukkit.Bukkit
-import org.bukkit.command.defaults.HelpCommand
 import org.koin.core.context.GlobalContext
 import org.koin.core.context.loadKoinModules
 import org.koin.dsl.module
@@ -47,7 +53,7 @@ open class AdvanceRailway: SuspendingJavaPlugin() {
         val mapWorld: MapWorld = squaremapApi.getWorldIfEnabled(BukkitAdapter.worldIdentifier(world)).orElse(null)
         val provider =
             SimpleLayerProvider.builder("advanced Railway").layerPriority(1).defaultHidden(true).zIndex(0).build()
-        mapWorld.layerRegistry().register(Key.of("advanced_Railway"), provider)
+        mapWorld.layerRegistry().register(Key.of("Railway"), provider)
 
         loadKoinModules(module {
             single { squaremapApi }
@@ -89,9 +95,14 @@ open class AdvanceRailway: SuspendingJavaPlugin() {
             )
         }
         handler.registerPoint3DParser()
+        handler.registerRailwayIdParser()
+        handler.registerStationIdParser()
+        handler.registerGroupIdParser()
 
         with(handler) {
-            register(HelpCommand(), RailwayMainCommand())
+            register(GeneralCommand())
+            register(RailwayMainCommand(), RailwayInfoCommand(), RailwayEditCommand())
+            register(StationMainCommand())
         }
     }
 

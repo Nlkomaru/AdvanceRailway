@@ -22,7 +22,7 @@ import xyz.jpenilla.squaremap.api.marker.Marker
 class RailwayDataLoader: KoinComponent {
     private val plugin: AdvanceRailway by inject()
     private val provider: SimpleLayerProvider by inject()
-    private val dataFolder = plugin.dataFolder.resolve("data").resolve("railway")
+    private val dataFolder = plugin.dataFolder.resolve("data").resolve("railways")
 
     fun load() {
         if (!dataFolder.exists()) {

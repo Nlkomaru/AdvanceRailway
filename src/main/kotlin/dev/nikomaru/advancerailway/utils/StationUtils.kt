@@ -25,7 +25,7 @@ object StationUtils: KoinComponent {
     val plugin: AdvanceRailway by inject()
 
     suspend fun nearStation(location: Location): Either<StationSearchError, StationId> = withContext(Dispatchers.IO) {
-        val folder = plugin.dataFolder.resolve("data").resolve("station")
+        val folder = plugin.dataFolder.resolve("data").resolve("stations")
         if (!folder.exists()) {
             folder.mkdirs()
             return@withContext Either.Left(StationSearchError.NOT_FOUND_STATION)
@@ -41,7 +41,7 @@ object StationUtils: KoinComponent {
 
     suspend fun getStationData(stationId: StationId): Either<StationSearchError, StationData> =
         withContext(Dispatchers.IO) {
-            val folder = plugin.dataFolder.resolve("data").resolve("station")
+            val folder = plugin.dataFolder.resolve("data").resolve("stations")
             if (!folder.exists()) {
                 folder.mkdirs()
                 return@withContext Either.Left(StationSearchError.NOT_FOUND_STATION)

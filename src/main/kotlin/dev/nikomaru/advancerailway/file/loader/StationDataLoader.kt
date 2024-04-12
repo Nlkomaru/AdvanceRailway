@@ -28,8 +28,8 @@ import java.util.*
 class StationDataLoader: KoinComponent {
     private val plugin: AdvanceRailway by inject()
     private val provider: SimpleLayerProvider by inject()
-    private val stationDataFolder = plugin.dataFolder.resolve("data").resolve("station")
-    private val railwayDataFolder = plugin.dataFolder.resolve("data").resolve("railway")
+    private val stationDataFolder = plugin.dataFolder.resolve("data").resolve("stations")
+    private val railwayDataFolder = plugin.dataFolder.resolve("data").resolve("railways")
     private val joinedCount = hashMapOf<StationId, Int>()
 
     fun load() {
