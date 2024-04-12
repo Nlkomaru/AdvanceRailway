@@ -19,7 +19,7 @@
 
 - [x] `ar railway add <railwayId> <railwayName> <start> <direction> <end>` 路線を追加します。
 - [x] `ar railway update <railwayId> <start> <direction> <end>` 路線の始点と終点を変更します。 道中の路線が変化した場合もこちらを使用してください。
-- [x] `ar railway remove <railwayId>` 路線を削除します。
+- [x] `ar railway set nam <railwayId>` 路線を削除します。
 - [x] `ar railway set lineType <railwayId> <lineType>` 路線の色を変更します。
 - [x] `ar railway set group <railwayId> <groupId>` 路線のグループを変更します。
 - [x] `ar railway unset group <railwayId> <stationId>` 路線のグループを削除します。
@@ -32,7 +32,7 @@
 
 - [x] `ar station add <stationId> <stationName> [point]` 駅を追加します。 pointがない場合はプレイヤーの位置に追加されます。
 - [x] `ar station remove <stationId>` 駅を削除します。
-- [ ] `ar station rename <stationId> <newName>` 駅の名前を変更します。
+- [ ] `ar station set nam <stationId> <newName>` 駅の名前を変更します。
 - [ ] `ar station set location <stationId> [point]` 駅の座標を変更します。
 - [ ] `ar station set numbering <stationId> <newNumbering>` 駅の番号を変更します。
 - [x] `ar station info <stationId>` 駅の情報を表示します。
@@ -40,11 +40,12 @@
 
 ## グループ
 
-- [ ] `ar group add <groupId> <groupName>` グループを追加します。
-- [ ] `ar group remove <groupId>` グループを削除します。
-- [ ] `ar group rename <groupId> <oldName> <newName>` グループの名前を変更します。
-- [ ] `ar group info <groupId>` グループの情報を表示します。
-- [ ] `ar group list` グループの一覧を表示します。
+- [x] `ar group add <groupId> <groupName>` グループを追加します。
+- [x] `ar group remove <groupId>` グループを削除します。
+- [x] `ar group set name <groupId> <oldName> <newName>` グループの名前を変更します。
+- [x] `ar group set color <groupId> <r> <g> <b>` グループの色を変更します。
+- [x] `ar group info <groupId>` グループの情報を表示します。
+- [x] `ar group list` グループの一覧を表示します。
 
 路線名はかざしたとき
 駅名は切り換えれるように

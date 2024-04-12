@@ -22,8 +22,8 @@ import revxrsal.commands.annotation.Subcommand
 
 @Command("ar station", "advancerailway station")
 class StationEditCommand {
-    @Subcommand("rename")
-    suspend fun rename(sender: CommandSender, stationId: StationId, newName: String) {
+    @Subcommand("set name")
+    suspend fun setName(sender: CommandSender, stationId: StationId, newName: String) {
         val data = when (val res = StationUtils.getStationData(stationId)) {
             is Either.Left -> {
                 sender.sendMessage("Station not found")

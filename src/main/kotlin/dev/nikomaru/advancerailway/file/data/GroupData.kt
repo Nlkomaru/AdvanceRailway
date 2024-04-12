@@ -23,7 +23,7 @@ import java.awt.Color
 @Serializable
 data class GroupData(
     val groupId: GroupId,
-    val groupName: String,
+    val name: String,
     val railwayColor: @Serializable(with = ColorSerializer::class) Color,
 ): KoinComponent {
     val plugin: AdvanceRailway by inject()

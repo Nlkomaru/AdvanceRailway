@@ -13,6 +13,9 @@ import com.comphenix.protocol.ProtocolLibrary
 import com.github.shynixn.mccoroutine.bukkit.SuspendingJavaPlugin
 import com.github.shynixn.mccoroutine.bukkit.registerSuspendingEvents
 import dev.nikomaru.advancerailway.commands.GeneralCommand
+import dev.nikomaru.advancerailway.commands.group.GroupEditCommand
+import dev.nikomaru.advancerailway.commands.group.GroupInfoCommand
+import dev.nikomaru.advancerailway.commands.group.GroupMainCommand
 import dev.nikomaru.advancerailway.commands.railway.RailwayEditCommand
 import dev.nikomaru.advancerailway.commands.railway.RailwayInfoCommand
 import dev.nikomaru.advancerailway.commands.railway.RailwayMainCommand
@@ -105,6 +108,7 @@ open class AdvanceRailway: SuspendingJavaPlugin() {
             register(GeneralCommand())
             register(RailwayMainCommand(), RailwayInfoCommand(), RailwayEditCommand())
             register(StationMainCommand(), StationInfoCommand(), StationEditCommand())
+            register(GroupMainCommand(), GroupInfoCommand(), GroupEditCommand())
         }
     }
 
