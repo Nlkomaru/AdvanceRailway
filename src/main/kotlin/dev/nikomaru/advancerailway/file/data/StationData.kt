@@ -10,6 +10,7 @@
 package dev.nikomaru.advancerailway.file.data
 
 import dev.nikomaru.advancerailway.AdvanceRailway
+import dev.nikomaru.advancerailway.AdvanceRailway.Companion.plugin
 import dev.nikomaru.advancerailway.Point3D
 import dev.nikomaru.advancerailway.file.utils.ColorSerializer
 import dev.nikomaru.advancerailway.file.utils.WorldSerializer
@@ -37,5 +38,12 @@ data class StationData(
     fun save() {
         val file = plugin.dataFolder.resolve("data").resolve("stations").resolve("${stationId.value}.json")
         file.writeText(json.encodeToString(this))
+    }
+
+    companion object {
+        fun load(stationId: StationId): StationData {
+            val file = plugin.dataFolder.resolve("data").resolve("stations").resolve("${stationId.value}.json")
+            return json.decodeFromString(file.readText())
+        }
     }
 }

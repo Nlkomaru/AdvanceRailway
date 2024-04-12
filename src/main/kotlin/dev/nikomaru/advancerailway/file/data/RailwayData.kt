@@ -43,7 +43,10 @@ data class RailwayData(
         file.writeText(json.encodeToString(this))
     }
 
-    fun toCommandString(): String {
-        return "ar register ${id.value} $startPoint $directionPoint $endPoint"
+    companion object {
+        fun load(id: RailwayId): RailwayData {
+            val file = AdvanceRailway.plugin.dataFolder.resolve("data").resolve("railways").resolve("${id.value}.json")
+            return json.decodeFromString(file.readText())
+        }
     }
 }

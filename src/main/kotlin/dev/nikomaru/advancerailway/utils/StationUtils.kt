@@ -11,7 +11,7 @@ package dev.nikomaru.advancerailway.utils
 
 import arrow.core.Either
 import dev.nikomaru.advancerailway.AdvanceRailway
-import dev.nikomaru.advancerailway.error.StationSearchError
+import dev.nikomaru.advancerailway.error.DataSearchError
 import dev.nikomaru.advancerailway.file.data.StationData
 import dev.nikomaru.advancerailway.file.value.StationId
 import dev.nikomaru.advancerailway.utils.Utils.json
@@ -24,13 +24,13 @@ import org.koin.core.component.inject
 object StationUtils: KoinComponent {
     val plugin: AdvanceRailway by inject()
 
-    suspend fun nearStation(location: Location): Either<StationSearchError, StationId> = withContext(Dispatchers.IO) {
+    suspend fun nearStation(location: Location): Either<DataSearchError, StationId> = withContext(Dispatchers.IO) {
         val folder = plugin.dataFolder.resolve("data").resolve("stations")
         if (!folder.exists()) {
             folder.mkdirs()
-            return@withContext Either.Left(StationSearchError.NOT_FOUND_STATION)
+            return@withContext Either.Left(DataSearchError.NOT_FOUND)
         }
-        val files = folder.listFiles() ?: return@withContext Either.Left(StationSearchError.NOT_FOUND_STATION)
+        val files = folder.listFiles() ?: return@withContext Either.Left(DataSearchError.NOT_FOUND)
         val station =
             files.map { StationId(it.nameWithoutExtension) }.map { getStationData(it) }.filter { it.isRight() }
                 .map { it.getOrNull()!! }
@@ -39,16 +39,16 @@ object StationUtils: KoinComponent {
         return@withContext Either.Right(station.first().stationId)
     }
 
-    suspend fun getStationData(stationId: StationId): Either<StationSearchError, StationData> =
+    suspend fun getStationData(stationId: StationId): Either<DataSearchError, StationData> =
         withContext(Dispatchers.IO) {
             val folder = plugin.dataFolder.resolve("data").resolve("stations")
             if (!folder.exists()) {
                 folder.mkdirs()
-                return@withContext Either.Left(StationSearchError.NOT_FOUND_STATION)
+                return@withContext Either.Left(DataSearchError.NOT_FOUND)
             }
             val file = folder.resolve("${stationId.value}.json")
             if (!file.exists()) {
-                return@withContext Either.Left(StationSearchError.NOT_FOUND_STATION)
+                return@withContext Either.Left(DataSearchError.NOT_FOUND)
             }
             return@withContext Either.Right(json.decodeFromString(file.readText()))
         }

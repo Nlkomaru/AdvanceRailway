@@ -29,7 +29,6 @@ class StationInfoCommand: KoinComponent {
             is Either.Left -> {
                 sender.sendMessage("Station not found")
                 return
-
             }
 
             is Either.Right -> {
@@ -39,7 +38,7 @@ class StationInfoCommand: KoinComponent {
         sender.sendMessage("Station ID: ${data.stationId.value}")
         sender.sendMessage("Station Name: ${data.name} <click:suggest_command:'/ar station rename ${data.stationId.value} <newName>'>[edit]</click>")
         sender.sendMessage("Station Location: ${data.world.name}:${data.point} <click:suggest_command:'/ar station set location ${data.stationId.value} <newName>'>[edit]</click>")
-        sender.sendMessage("Station numbering: ${data.numbering}")
+        sender.sendMessage("Station numbering: ${data.numbering} <click:suggest_command:'/ar station set numbering ${data.stationId.value} <newName>'>[edit]</click>")
 
     }
 

@@ -10,6 +10,7 @@
 package dev.nikomaru.advancerailway.commands.railway
 
 
+import dev.nikomaru.advancerailway.AdvanceRailway
 import dev.nikomaru.advancerailway.Point3D
 import dev.nikomaru.advancerailway.file.data.RailwayData
 import dev.nikomaru.advancerailway.file.type.LineType
@@ -19,15 +20,23 @@ import dev.nikomaru.advancerailway.utils.StationUtils
 import org.bukkit.Bukkit
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import revxrsal.commands.annotation.Command
 import revxrsal.commands.annotation.Subcommand
 
 @Command("advancerailway railway", "ar railway")
-class RailwayMainCommand {
+class RailwayMainCommand: KoinComponent {
+    val plugin: AdvanceRailway by inject()
+
     @Subcommand("add")
     suspend fun register(
         sender: CommandSender, railwayId: String, startPoint: Point3D, directionPoint: Point3D, endPoint: Point3D
     ) {
+        railwayId.matches(Regex("[a-zA-Z0-9_]+")) || run {
+            sender.sendMessage("Error: Invalid railway ID \"[a-zA-Z0-9_]+\"")
+            return
+        }
         sender.sendMessage("Registering railway...")
         handleRailway(sender, railwayId, startPoint, directionPoint, endPoint, "Registered")
     }
@@ -76,5 +85,16 @@ class RailwayMainCommand {
         )
         railwayData.save()
         sender.sendMessage("$action railway: $railwayId")
+    }
+
+    @Subcommand("remove")
+    fun remove(sender: CommandSender, railwayId: String) {
+        val file = plugin.dataFolder.resolve("data").resolve("railways").resolve("$railwayId.json")
+        if (!file.exists()) {
+            sender.sendMessage("Error: Railway not found")
+            return
+        }
+        file.delete()
+        sender.sendMessage("Removed railway: $railwayId")
     }
 }

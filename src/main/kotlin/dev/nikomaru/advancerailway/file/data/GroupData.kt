@@ -10,6 +10,7 @@
 package dev.nikomaru.advancerailway.file.data
 
 import dev.nikomaru.advancerailway.AdvanceRailway
+import dev.nikomaru.advancerailway.AdvanceRailway.Companion.plugin
 import dev.nikomaru.advancerailway.file.utils.ColorSerializer
 import dev.nikomaru.advancerailway.file.value.GroupId
 import dev.nikomaru.advancerailway.utils.Utils.json
@@ -29,5 +30,12 @@ data class GroupData(
     fun save() {
         val file = plugin.dataFolder.resolve("data").resolve("groups").resolve("${groupId.value}.json")
         file.writeText(json.encodeToString(this))
+    }
+
+    companion object {
+        fun load(groupId: GroupId): GroupData {
+            val file = plugin.dataFolder.resolve("data").resolve("groups").resolve("${groupId.value}.json")
+            return json.decodeFromString(file.readText())
+        }
     }
 }

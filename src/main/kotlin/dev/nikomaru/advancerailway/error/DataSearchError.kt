@@ -9,6 +9,6 @@
 
 package dev.nikomaru.advancerailway.error
 
-enum class StationSearchError {
-    NOT_FOUND_STATION
+enum class DataSearchError {
+    NOT_FOUND
 }

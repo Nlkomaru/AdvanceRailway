@@ -15,6 +15,7 @@ import arrow.core.right
 import dev.nikomaru.advancerailway.AdvanceRailway
 import dev.nikomaru.advancerailway.Line3D
 import dev.nikomaru.advancerailway.Point3D
+import dev.nikomaru.advancerailway.error.DataSearchError
 import dev.nikomaru.advancerailway.error.RailTraceError
 import dev.nikomaru.advancerailway.file.data.ConfigData
 import dev.nikomaru.advancerailway.file.data.RailwayData
@@ -172,12 +173,18 @@ object RailwayUtils: KoinComponent {
     }
 
 
-    fun getRailwayData(railwayId: RailwayId): RailwayData? {
-        val file = plugin.dataFolder.resolve("data").resolve("railways").resolve("${railwayId.value}.json")
-        if (!file.exists()) {
-            return null
+    suspend fun getRailwayData(railwayId: RailwayId): Either<DataSearchError, RailwayData> =
+        withContext(Dispatchers.IO) {
+            val folder = StationUtils.plugin.dataFolder.resolve("data").resolve("railways")
+            if (!folder.exists()) {
+                folder.mkdirs()
+                return@withContext Either.Left(DataSearchError.NOT_FOUND)
+            }
+            val file = folder.resolve("${railwayId.value}.json")
+            if (!file.exists()) {
+                return@withContext Either.Left(DataSearchError.NOT_FOUND)
+            }
+            return@withContext Either.Right(json.decodeFromString(file.readText()))
         }
-        return json.decodeFromString<RailwayData>(file.readText())
-    }
 
 }

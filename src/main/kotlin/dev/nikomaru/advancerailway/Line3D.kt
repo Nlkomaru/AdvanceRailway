@@ -14,7 +14,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable(with = Line3DSerializer::class)
 class Line3D(first: Point3D, second: Point3D) {
-    var points = mutableListOf<Point3D>()
+    var points = arrayListOf<Point3D>()
 
     init {
         points.add(first)
@@ -31,12 +31,12 @@ class Line3D(first: Point3D, second: Point3D) {
         val firstLinesInclination = line.points[0].getInclination(line.points[1])
         if (points.last() == line.points[0]) {
             if (lastLinesInclination == firstLinesInclination) {
-                points = points.dropLast(1).toMutableList()
+                points = ArrayList(points.dropLast(1))
             }
             points.addAll(line.points.drop(1))
         } else {
             if (lastLinesInclination == firstLinesInclination) {
-                points = points.dropLast(1).toMutableList()
+                points = ArrayList(points.dropLast(1))
                 points.addAll(line.points.drop(1))
             } else {
                 points.addAll(line.points)
@@ -50,7 +50,7 @@ class Line3D(first: Point3D, second: Point3D) {
         val firstLinesInclination = points.last().getInclination(point)
         if (points.last() != point) {
             if (lastLinesInclination == firstLinesInclination) {
-                points = points.dropLast(1).toMutableList()
+                points = ArrayList(points.dropLast(1))
                 points.add(point)
             } else {
                 points.add(point)

@@ -9,6 +9,7 @@
 
 package dev.nikomaru.advancerailway.commands.station
 
+import dev.nikomaru.advancerailway.AdvanceRailway
 import dev.nikomaru.advancerailway.Point3D
 import dev.nikomaru.advancerailway.file.data.StationData
 import dev.nikomaru.advancerailway.file.value.StationId
@@ -16,11 +17,14 @@ import dev.nikomaru.advancerailway.utils.Utils.toPoint3D
 import org.bukkit.Bukkit
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import revxrsal.commands.annotation.Command
 import revxrsal.commands.annotation.Subcommand
 
 @Command("ar station", "advancerailway station")
-class StationMainCommand {
+class StationMainCommand: KoinComponent {
+    val plugin: AdvanceRailway by inject()
     @Subcommand("add")
     fun add(sender: CommandSender, id: String, name: String, inputPoint: Point3D?) { // Add station
         if (sender !is Player && inputPoint == null) {
@@ -33,6 +37,17 @@ class StationMainCommand {
         val data = StationData(stationId, name, null, world, point, null, null)
         data.save()
         sender.sendMessage("Station added")
+    }
+
+    @Subcommand("remove")
+    fun remove(sender: CommandSender, id: StationId) { // Remove station
+        val file = plugin.dataFolder.resolve("data").resolve("stations").resolve("${id.value}.json")
+        if (!file.exists()) {
+            sender.sendMessage("Station not found")
+            return
+        }
+        file.delete()
+        sender.sendMessage("Station removed")
     }
 
 }

@@ -15,9 +15,9 @@ import dev.nikomaru.advancerailway.file.loader.StationDataLoader
 
 object FileLoader {
     fun load() {
-        RailwayDataLoader().load()
-        StationDataLoader().load()
         ConfigDataLoader().load()
+        StationDataLoader().load()
+        RailwayDataLoader().load()
     }
 
     fun export() {
