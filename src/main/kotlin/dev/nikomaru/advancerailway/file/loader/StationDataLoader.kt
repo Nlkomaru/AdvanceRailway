@@ -47,13 +47,13 @@ class StationDataLoader: KoinComponent {
 
         stationDataFolder.listFiles()?.forEach { file ->
             val stationData = json.decodeFromString<StationData>(file.readText())
-            val key = Key.of(stationData.id.value)
+            val key = Key.of(stationData.stationId.value)
             val random = Random()
-            random.setSeed(stationData.id.hashCode().toLong())
+            random.setSeed(stationData.stationId.hashCode().toLong())
             val color = stationData.color ?: Color(random.nextInt(256), random.nextInt(256), random.nextInt(256))
             val colorOption = MarkerOptions.builder().fillColor(color.brighter()).strokeColor(color).build()
             val marker = Marker.circle(
-                Point.of(stationData.point.x, stationData.point.y), 5.0 * joinedCount[stationData.id]!!
+                Point.of(stationData.point.x, stationData.point.y), 5.0 * joinedCount[stationData.stationId]!!
             ).markerOptions(colorOption)
 
             provider.addMarker(key, marker)

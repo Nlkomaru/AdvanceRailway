@@ -24,7 +24,7 @@ import java.awt.Color
 
 @Serializable
 data class StationData(
-    val id: StationId,
+    val stationId: StationId,
     val name: String,
     val numbering: String?,
     val world: @Serializable(with = WorldSerializer::class) World,
@@ -35,7 +35,7 @@ data class StationData(
     val plugin: AdvanceRailway by inject()
 
     fun save() {
-        val file = plugin.dataFolder.resolve("data").resolve("stations").resolve("${id.value}.json")
+        val file = plugin.dataFolder.resolve("data").resolve("stations").resolve("${stationId.value}.json")
         file.writeText(json.encodeToString(this))
     }
 }

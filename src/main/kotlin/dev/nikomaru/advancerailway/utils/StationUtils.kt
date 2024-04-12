@@ -36,7 +36,7 @@ object StationUtils: KoinComponent {
                 .map { it.getOrNull()!! }
         val world = location.world //TODO 距離の計算を変更する ネザーの場合は8倍にする
         station.sortedBy { it.point.toLocation(location.world).distance(location) }
-        return@withContext Either.Right(station.first().id)
+        return@withContext Either.Right(station.first().stationId)
     }
 
     suspend fun getStationData(stationId: StationId): Either<StationSearchError, StationData> =

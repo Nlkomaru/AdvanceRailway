@@ -37,9 +37,17 @@ class RailwayInfoCommand: KoinComponent {
     @Subcommand("list")
     fun list(sender: CommandSender) {
         val list = plugin.dataFolder.resolve("data").resolve("railways").listFiles()?.map { it.nameWithoutExtension }
-            ?: emptyList()
+            ?: run {
+                sender.sendMessage("No railway found")
+                return
+            }
+        if (list.isEmpty()) {
+            sender.sendMessage("No railway found")
+            return
+        }
+        sender.sendRichMessage("Railway List: <yellow>Click for details")
         list.forEach {
-            sender.sendMessage(it)
+            sender.sendRichMessage("<click:run_command:/ar railway info $it>$it</click>")
         }
     }
 }
