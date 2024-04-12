@@ -10,6 +10,7 @@
 package dev.nikomaru.advancerailway.file.loader
 
 import dev.nikomaru.advancerailway.AdvanceRailway
+import dev.nikomaru.advancerailway.file.data.ConfigData
 import dev.nikomaru.advancerailway.file.data.RailwayData
 import dev.nikomaru.advancerailway.file.data.StationData
 import dev.nikomaru.advancerailway.file.value.StationId
@@ -28,6 +29,7 @@ import java.util.*
 class StationDataLoader: KoinComponent {
     private val plugin: AdvanceRailway by inject()
     private val provider: SimpleLayerProvider by inject()
+    private val config: ConfigData by inject()
     private val stationDataFolder = plugin.dataFolder.resolve("data").resolve("stations")
     private val railwayDataFolder = plugin.dataFolder.resolve("data").resolve("railways")
     private val joinedCount = hashMapOf<StationId, Int>()
@@ -53,7 +55,8 @@ class StationDataLoader: KoinComponent {
             val color = stationData.color ?: Color(random.nextInt(256), random.nextInt(256), random.nextInt(256))
             val colorOption = MarkerOptions.builder().fillColor(color.brighter()).strokeColor(color).build()
             val marker = Marker.circle(
-                Point.of(stationData.point.x, stationData.point.y), 5.0 * joinedCount[stationData.stationId]!!
+                Point.of(stationData.point.x, stationData.point.z),
+                config.circleDefault * (joinedCount[stationData.stationId] ?: 1)
             ).markerOptions(colorOption)
 
             provider.addMarker(key, marker)

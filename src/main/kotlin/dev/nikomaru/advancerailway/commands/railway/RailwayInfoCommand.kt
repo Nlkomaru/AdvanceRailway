@@ -9,6 +9,7 @@
 
 package dev.nikomaru.advancerailway.commands.railway
 
+import arrow.core.Either
 import dev.nikomaru.advancerailway.AdvanceRailway
 import dev.nikomaru.advancerailway.file.value.RailwayId
 import dev.nikomaru.advancerailway.utils.RailwayUtils
@@ -24,10 +25,14 @@ class RailwayInfoCommand: KoinComponent {
     val plugin: AdvanceRailway by inject()
 
     @Subcommand("info")
-    fun info(sender: CommandSender, railwayId: RailwayId) {
-        val data = RailwayUtils.getRailwayData(railwayId) ?: run {
-            sender.sendMessage("Railway not found")
-            return
+    suspend fun info(sender: CommandSender, railwayId: RailwayId) {
+        val data = when (val result = RailwayUtils.getRailwayData(railwayId)) {
+            is Either.Left -> {
+                sender.sendMessage("Railway not found")
+                return
+            }
+
+            is Either.Right -> result.value
         }
         sender.sendMessage("Railway ID: ${data.id.value}")
         sender.sendMessage("Railway Stations: ${data.toStation} -> ${data.fromStation}")

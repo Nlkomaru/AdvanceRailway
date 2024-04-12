@@ -31,7 +31,7 @@ class RailwayDataLoader: KoinComponent {
         dataFolder.listFiles()?.forEach { file ->
             val data = json.decodeFromString<RailwayData>(file.readText())
             val key = Key.of(data.id.value)
-            val marker = Marker.multiPolyline(data.line.points.map { Point.of(it.x, it.y) })
+            val marker = Marker.multiPolyline(data.line.points.map { Point.of(it.x, it.z) })
             provider.addMarker(key, marker)
         }
     }

@@ -20,13 +20,15 @@ import org.bukkit.entity.Player
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import revxrsal.commands.annotation.Command
+import revxrsal.commands.annotation.Optional
 import revxrsal.commands.annotation.Subcommand
 
 @Command("ar station", "advancerailway station")
 class StationMainCommand: KoinComponent {
     val plugin: AdvanceRailway by inject()
+
     @Subcommand("add")
-    fun add(sender: CommandSender, id: String, name: String, inputPoint: Point3D?) { // Add station
+    fun add(sender: CommandSender, id: String, name: String, @Optional inputPoint: Point3D?) { // Add station
         if (sender !is Player && inputPoint == null) {
             println("You must enter the point")
             return

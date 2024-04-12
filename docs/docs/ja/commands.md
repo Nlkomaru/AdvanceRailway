@@ -32,9 +32,9 @@
 
 - [x] `ar station add <stationId> <stationName> [point]` 駅を追加します。 pointがない場合はプレイヤーの位置に追加されます。
 - [x] `ar station remove <stationId>` 駅を削除します。
-- [ ] `ar station set nam <stationId> <newName>` 駅の名前を変更します。
-- [ ] `ar station set location <stationId> [point]` 駅の座標を変更します。
-- [ ] `ar station set numbering <stationId> <newNumbering>` 駅の番号を変更します。
+- [x] `ar station set name <stationId> <newName>` 駅の名前を変更します。
+- [x] `ar station set location <stationId> [point]` 駅の座標を変更します。
+- [x] `ar station set numbering <stationId> <newNumbering>` 駅の番号を変更します。
 - [x] `ar station info <stationId>` 駅の情報を表示します。
 - [x] `ar station list` 駅の一覧を表示します。
 

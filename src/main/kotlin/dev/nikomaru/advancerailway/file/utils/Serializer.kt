@@ -63,7 +63,7 @@ object Line3DSerializer: KSerializer<Line3D> {
     override val descriptor = PrimitiveSerialDescriptor("Line3D", PrimitiveKind.STRING)
 
     override fun deserialize(decoder: Decoder): Line3D {
-        val points = decoder.decodeString().split(": ").map { it.drop(1) }.map { it.dropLast(1) }.map { it.split(",") }
+        val points = decoder.decodeString().split(":").map { it.drop(1) }.map { it.dropLast(1) }.map { it.split(",") }
             .map { Point3D(it[0].toDouble(), it[1].toDouble(), it[2].toDouble()) }
         val line = Line3D(points[0], points[1])
         points.drop(2).forEach { line.addPoint(it) }

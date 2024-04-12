@@ -14,4 +14,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class ConfigData(
     val limit: Long,
+    val circleDefault: Double = 1.0,
 )
