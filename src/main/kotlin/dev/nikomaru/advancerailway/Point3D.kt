@@ -23,6 +23,10 @@ class Point3D(val x: Double, val y: Double, val z: Double) {
         return sqrt((point.x - x).pow(2.0) + (point.y - y).pow(2.0) + (point.z - z).pow(2.0))
     }
 
+    fun distanceTo2D(point: Point3D): Double {
+        return sqrt((point.x - x).pow(2.0) + (point.z - z).pow(2.0))
+    }
+
     fun getInclination(point: Point3D): Pair<Double, Double> {
         val x = point.x - this.x
         val y = point.y - this.y

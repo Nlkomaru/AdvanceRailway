@@ -12,7 +12,7 @@ package dev.nikomaru.advancerailway.listener
 import arrow.core.Either
 import dev.nikomaru.advancerailway.Point3D
 import dev.nikomaru.advancerailway.utils.RailwayUtils
-import dev.nikomaru.advancerailway.utils.RailwayUtils.railFinishDetect
+import dev.nikomaru.advancerailway.utils.RailwayUtils.railEndpointInspect
 import dev.nikomaru.advancerailway.utils.coroutines.async
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -59,15 +59,19 @@ class RailClickEvent: Listener {
             }
             val res = detectedRailLocations.map { detectedPlace ->
                 async {
-                    railFinishDetect(locate.let { Point3D(it.x, it.y, it.z) },
-                                     detectedPlace.let { Point3D(it.x, it.y, it.z) })
+                    railEndpointInspect(locate.let { Point3D(it.x, it.y, it.z) },
+                                        detectedPlace.let { Point3D(it.x, it.y, it.z) })
                 }
             }.awaitAll()
             res.forEach {
                 when (it) {
                     is Either.Right -> {
                         player.sendMessage("Railway end detected.")
-                        player.sendMessage("Railway Data : $startPoint -> ${it.value}")
+                        val list = it.value.toList()
+                        list.forEach { value ->
+                            val (start, direction, end) = value
+                            player.sendMessage("Railway Data : $start -> $direction -> $end  <click:suggest_command:'/ar railway add <railwayId> <railwayName> $start $direction $end'>[create]</click>")
+                        }
                     }
 
                     is Either.Left -> {

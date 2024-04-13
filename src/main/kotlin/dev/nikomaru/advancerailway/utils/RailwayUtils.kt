@@ -15,6 +15,7 @@ import arrow.core.right
 import dev.nikomaru.advancerailway.AdvanceRailway
 import dev.nikomaru.advancerailway.Line3D
 import dev.nikomaru.advancerailway.Point3D
+import dev.nikomaru.advancerailway.data.InspectData
 import dev.nikomaru.advancerailway.error.DataSearchError
 import dev.nikomaru.advancerailway.error.RailTraceError
 import dev.nikomaru.advancerailway.file.data.ConfigData
@@ -100,13 +101,14 @@ object RailwayUtils: KoinComponent {
         }
     }
 
-    suspend fun railFinishDetect(
+    suspend fun railEndpointInspect(
         first: Point3D, directionPoint: Point3D
-    ): Either<RailTraceError, Point3D> = withContext(Dispatchers.minecraft) {
+    ): Either<RailTraceError, Pair<InspectData, InspectData>> = withContext(Dispatchers.minecraft) {
+        var forward = InspectData(first, directionPoint, null)
+        var backward = InspectData(null, null, first)
         var previousPoint = first
         var currentPoint = directionPoint
         var count = 0
-        val line = Line3D(first, directionPoint)
 
         while (count < config.limit) {
             val diff = previousPoint.getDiff(currentPoint)
@@ -119,7 +121,9 @@ object RailwayUtils: KoinComponent {
             }
             val rails = nextPoint.filter { it.toLocation(Bukkit.getWorld("world")!!).block.blockData is Rail }
             if (rails.isEmpty()) {
-                return@withContext currentPoint.right()
+                forward = forward.copy(end = currentPoint)
+                backward = backward.copy(start = currentPoint, direction = previousPoint)
+                return@withContext Pair(forward, backward).right()
             }
             if (rails.size > 1) {
                 return@withContext RailTraceError.MULTIPLE_RAIL.left()
@@ -127,9 +131,6 @@ object RailwayUtils: KoinComponent {
             previousPoint = currentPoint
             currentPoint = rails.first()
 
-            if (count % 2 == 0) {
-                line.addPoint(currentPoint)
-            }
             count++
         }
         return@withContext RailTraceError.ATTACHED_TO_LIMIT.left()

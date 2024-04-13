@@ -15,6 +15,7 @@ import dev.nikomaru.advancerailway.error.DataSearchError
 import dev.nikomaru.advancerailway.file.data.StationData
 import dev.nikomaru.advancerailway.file.value.StationId
 import dev.nikomaru.advancerailway.utils.Utils.json
+import dev.nikomaru.advancerailway.utils.Utils.toPoint3D
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.bukkit.Location
@@ -35,8 +36,8 @@ object StationUtils: KoinComponent {
             files.map { StationId(it.nameWithoutExtension) }.map { getStationData(it) }.filter { it.isRight() }
                 .map { it.getOrNull()!! }
         val world = location.world //TODO 距離の計算を変更する ネザーの場合は8倍にする
-        station.sortedBy { it.point.toLocation(location.world).distance(location) }
-        return@withContext Either.Right(station.first().stationId)
+
+        return@withContext Either.Right(station.minByOrNull { it.point.distanceTo2D(location.toPoint3D()) }!!.stationId)
     }
 
     suspend fun getStationData(stationId: StationId): Either<DataSearchError, StationData> =

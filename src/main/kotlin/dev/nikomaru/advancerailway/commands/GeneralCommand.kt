@@ -60,8 +60,7 @@ class GeneralCommand: KoinComponent {
     }
 
     @Subcommand("export")
-    fun export(sender: CommandSender, type: ExportFileType) {
-        FileLoader.export()
-        sender.sendMessage("Exported map data.")
+    fun export(sender: CommandSender, type: ExportFileType) { //TODO: Implement export
+        sender.sendMessage("This feature is not implemented yet.")
     }
 }
