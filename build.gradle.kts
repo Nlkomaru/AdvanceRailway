@@ -7,6 +7,7 @@
  * If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
  */
 
+import net.minecrell.pluginyml.bukkit.BukkitPluginDescription
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 
 plugins {
@@ -103,6 +104,18 @@ bukkit {
     depend = listOf("ProtocolLib", "squaremap")
     main = "$group.advancerailway.AdvanceRailway"
     authors = listOf("Nikomaru")
+
+    permissions {
+        register("RaceAssist.admin") {
+            default = BukkitPluginDescription.Permission.Default.OP
+            children = listOf(
+                "advancerailway.command.group",
+                "advancerailway.command.station",
+                "advancerailway.command.railway",
+                "advancerailway.command.common"
+            )
+        }
+    }
 
 
     apiVersion = "1.20"

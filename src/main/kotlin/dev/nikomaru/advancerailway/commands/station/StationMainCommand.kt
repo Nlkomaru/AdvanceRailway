@@ -22,8 +22,10 @@ import org.koin.core.component.inject
 import revxrsal.commands.annotation.Command
 import revxrsal.commands.annotation.Optional
 import revxrsal.commands.annotation.Subcommand
+import revxrsal.commands.bukkit.annotation.CommandPermission
 
 @Command("ar station", "advancerailway station")
+@CommandPermission("advancerailway.command.station")
 class StationMainCommand: KoinComponent {
     val plugin: AdvanceRailway by inject()
 

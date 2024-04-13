@@ -18,8 +18,10 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import revxrsal.commands.annotation.Command
 import revxrsal.commands.annotation.Subcommand
+import revxrsal.commands.bukkit.annotation.CommandPermission
 
 @Command("ar group", "advancerailway group")
+@CommandPermission("advancerailway.command.group")
 class GroupInfoCommand: KoinComponent {
     val plugin: AdvanceRailway by inject()
 

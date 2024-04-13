@@ -15,9 +15,11 @@ import dev.nikomaru.advancerailway.utils.GroupUtils
 import org.bukkit.command.CommandSender
 import revxrsal.commands.annotation.Command
 import revxrsal.commands.annotation.Subcommand
+import revxrsal.commands.bukkit.annotation.CommandPermission
 import java.awt.Color
 
 @Command("ar group", "advancerailway group")
+@CommandPermission("advancerailway.command.group")
 class GroupEditCommand {
     @Subcommand("set name")
     suspend fun setName(sender: CommandSender, groupId: GroupId, newName: String) {

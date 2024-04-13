@@ -21,9 +21,11 @@ import revxrsal.commands.annotation.Command
 import revxrsal.commands.annotation.Default
 import revxrsal.commands.annotation.Description
 import revxrsal.commands.annotation.Subcommand
+import revxrsal.commands.bukkit.annotation.CommandPermission
 import revxrsal.commands.help.CommandHelp
 
 @Command("ar", "advancerailway")
+@CommandPermission("advancerailway.command.common")
 class GeneralCommand: KoinComponent {
     val plugin: AdvanceRailway by inject()
 
