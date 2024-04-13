@@ -43,19 +43,17 @@ class RailClickEvent: Listener {
                 return@withContext
             }
 
-            player.sendMessage("Detecting railway...")
+            player.sendRichMessage("Detecting railway...")
             val locate = block.location
             val startPoint = locate.let { Point3D(it.x, it.y, it.z) }
-            val availableLocations =
-                RailwayUtils.getRailAvailableDirection(block.location.let { Point3D(it.x, it.y, it.z) })
-                    .map { (x, y, z) ->
-                    locate.clone().add(x.toDouble(), y.toDouble(), z.toDouble())
-                }
+            val availableLocations = RailwayUtils.getRailAvailableDirection(startPoint).map { (x, y, z) ->
+                locate.clone().add(x.toDouble(), y.toDouble(), z.toDouble())
+            }
             val detectedRailLocations = availableLocations.filter { it.block.blockData is Rail }
             if (detectedRailLocations.count() == 1) {
-                player.sendMessage("This is a first or last rail.")
+                player.sendRichMessage("This is a first or last rail.")
             } else {
-                player.sendMessage("This is a middle rail.")
+                player.sendRichMessage("This is a middle rail.")
             }
             val res = detectedRailLocations.map { detectedPlace ->
                 async {
@@ -66,16 +64,16 @@ class RailClickEvent: Listener {
             res.forEach {
                 when (it) {
                     is Either.Right -> {
-                        player.sendMessage("Railway end detected.")
+                        player.sendRichMessage("Railway end detected.")
                         val list = it.value.toList()
                         list.forEach { value ->
                             val (start, direction, end) = value
-                            player.sendMessage("Railway Data : $start -> $direction -> $end  <click:suggest_command:'/ar railway add <railwayId> <railwayName> $start $direction $end'>[create]</click>")
+                            player.sendRichMessage("Railway Data : ${start!!.toPlainString()} -> ${direction!!.toPlainString()} -> ${end!!.toPlainString()}  <click:suggest_command:'/ar railway add <railwayId> ${start.toPlainString()} ${direction.toPlainString()} ${end.toPlainString()}'>[create]</click>")
                         }
                     }
 
                     is Either.Left -> {
-                        player.sendMessage("Error: ${it.value}")
+                        player.sendRichMessage("Error: ${it.value}")
                     }
                 }
             }

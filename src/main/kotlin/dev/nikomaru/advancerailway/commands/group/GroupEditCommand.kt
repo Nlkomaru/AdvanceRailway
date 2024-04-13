@@ -23,7 +23,7 @@ class GroupEditCommand {
     suspend fun setName(sender: CommandSender, groupId: GroupId, newName: String) {
         val data = when (val res = GroupUtils.getGroupData(groupId)) {
             is Either.Left -> {
-                sender.sendMessage("Station not found")
+                sender.sendRichMessage("Station not found")
                 return
             }
 
@@ -32,14 +32,14 @@ class GroupEditCommand {
             }
         }
         data.copy(name = newName).save()
-        sender.sendMessage("Station name set")
+        sender.sendRichMessage("Station name set")
     }
 
     @Subcommand("set color")
     suspend fun setColor(sender: CommandSender, groupId: GroupId, r: Int, g: Int, b: Int) {
         val data = when (val res = GroupUtils.getGroupData(groupId)) {
             is Either.Left -> {
-                sender.sendMessage("Station not found")
+                sender.sendRichMessage("Station not found")
                 return
             }
 
@@ -49,6 +49,6 @@ class GroupEditCommand {
         }
         val color = Color(r, g, b)
         data.copy(railwayColor = color).save()
-        sender.sendMessage("group color set")
+        sender.sendRichMessage("group color set")
     }
 }

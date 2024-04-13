@@ -45,6 +45,10 @@ class Point3D(val x: Double, val y: Double, val z: Double) {
         return "Point3D(x=$x, y=$y, z=$z)"
     }
 
+    fun toPlainString(): String {
+        return "$x,$y,$z"
+    }
+
     fun getPointsBetween(end: Point3D, step: Double): List<Point3D> {
         val distance = distanceTo(end)
         val points = mutableListOf<Point3D>()

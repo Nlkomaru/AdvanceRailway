@@ -28,26 +28,26 @@ class RailwayInfoCommand: KoinComponent {
     suspend fun info(sender: CommandSender, railwayId: RailwayId) {
         val data = when (val result = RailwayUtils.getRailwayData(railwayId)) {
             is Either.Left -> {
-                sender.sendMessage("Railway not found")
+                sender.sendRichMessage("Railway not found")
                 return
             }
 
             is Either.Right -> result.value
         }
-        sender.sendMessage("Railway ID: ${data.id.value}")
-        sender.sendMessage("Railway Stations: ${data.toStation} -> ${data.fromStation}")
-        sender.sendMessage("Railway Length: ${ceil(data.timeRequired / 6.0) / 10} minutes")
+        sender.sendRichMessage("Railway ID: ${data.id.value}")
+        sender.sendRichMessage("Railway Stations: ${data.toStation} -> ${data.fromStation}")
+        sender.sendRichMessage("Railway Length: ${ceil(data.timeRequired / 6.0) / 10} minutes")
     }
 
     @Subcommand("list")
     fun list(sender: CommandSender) {
         val list = plugin.dataFolder.resolve("data").resolve("railways").listFiles()?.map { it.nameWithoutExtension }
             ?: run {
-                sender.sendMessage("No railway found")
+                sender.sendRichMessage("No railway found")
                 return
             }
         if (list.isEmpty()) {
-            sender.sendMessage("No railway found")
+            sender.sendRichMessage("No railway found")
             return
         }
         sender.sendRichMessage("Railway List: <yellow>Click for details")

@@ -53,7 +53,12 @@ class StationDataLoader: KoinComponent {
             val random = Random()
             random.setSeed(stationData.stationId.hashCode().toLong())
             val color = stationData.color ?: Color(random.nextInt(256), random.nextInt(256), random.nextInt(256))
-            val colorOption = MarkerOptions.builder().fillColor(color.brighter()).strokeColor(color).build()
+            val colorOption = MarkerOptions.builder().fillColor(color.brighter()).strokeColor(color).clickTooltip(
+                """
+                ${if (stationData.numbering != null) "${stationData.numbering}</span><br/>" else ""}
+                名前 : ${stationData.name}</span><br/>
+                """.trimIndent()
+            )
             val marker = Marker.circle(
                 Point.of(stationData.point.x, stationData.point.z),
                 config.circleDefault * (joinedCount[stationData.stationId] ?: 1)

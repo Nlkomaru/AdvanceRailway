@@ -27,7 +27,7 @@ class GroupInfoCommand: KoinComponent {
     suspend fun info(sender: CommandSender, groupId: GroupId) {
         val data = when (val result = GroupUtils.getGroupData(groupId)) {
             is Either.Left -> {
-                sender.sendMessage("Group not found")
+                sender.sendRichMessage("Group not found")
                 return
             }
 
@@ -42,11 +42,11 @@ class GroupInfoCommand: KoinComponent {
     fun list(sender: CommandSender) {
         val list =
             plugin.dataFolder.resolve("data").resolve("groups").listFiles()?.map { it.nameWithoutExtension } ?: run {
-                sender.sendMessage("No group found")
+                sender.sendRichMessage("No group found")
                 return
             }
         if (list.isEmpty()) {
-            sender.sendMessage("No group found")
+            sender.sendRichMessage("No group found")
             return
         }
         sender.sendRichMessage("Group List: <yellow>Click for details")

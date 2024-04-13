@@ -9,6 +9,7 @@
 
 package dev.nikomaru.advancerailway.file.value
 
+import dev.nikomaru.advancerailway.utils.StationUtils
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.descriptors.PrimitiveKind
@@ -17,9 +18,11 @@ import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 
-@JvmInline
+
 @Serializable(with = StationNameSerializer::class)
-value class StationId(val value: String)
+class StationId(val value: String) {
+    suspend fun toData() = StationUtils.getStationData(this).getOrNull()
+}
 
 object StationNameSerializer: KSerializer<StationId> {
     override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("StationName", PrimitiveKind.STRING)

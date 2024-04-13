@@ -27,7 +27,7 @@ class StationInfoCommand: KoinComponent {
     suspend fun info(sender: CommandSender, stationId: StationId) {
         val data = when (val res = StationUtils.getStationData(stationId)) {
             is Either.Left -> {
-                sender.sendMessage("Station not found")
+                sender.sendRichMessage("Station not found")
                 return
             }
 
@@ -35,10 +35,10 @@ class StationInfoCommand: KoinComponent {
                 res.value
             }
         }
-        sender.sendMessage("Station ID: ${data.stationId.value}")
-        sender.sendMessage("Station Name: ${data.name} <click:suggest_command:'/ar station rename ${data.stationId.value} <newName>'>[edit]</click>")
-        sender.sendMessage("Station Location: ${data.world.name}:${data.point} <click:suggest_command:'/ar station set location ${data.stationId.value} <newName>'>[edit]</click>")
-        sender.sendMessage("Station numbering: ${data.numbering} <click:suggest_command:'/ar station set numbering ${data.stationId.value} <newName>'>[edit]</click>")
+        sender.sendRichMessage("Station ID: ${data.stationId.value}")
+        sender.sendRichMessage("Station Name: ${data.name} <click:suggest_command:'/ar station rename ${data.stationId.value} <newName>'>[edit]</click>")
+        sender.sendRichMessage("Station Location: ${data.world.name}:${data.point} <click:suggest_command:'/ar station set location ${data.stationId.value} <newName>'>[edit]</click>")
+        sender.sendRichMessage("Station numbering: ${data.numbering} <click:suggest_command:'/ar station set numbering ${data.stationId.value} <newName>'>[edit]</click>")
 
     }
 
@@ -46,11 +46,11 @@ class StationInfoCommand: KoinComponent {
     fun list(sender: CommandSender) {
         val list =
             plugin.dataFolder.resolve("data").resolve("stations").listFiles()?.map { it.nameWithoutExtension } ?: run {
-                sender.sendMessage("No station found")
+                sender.sendRichMessage("No station found")
                 return
             }
         if (list.isEmpty()) {
-            sender.sendMessage("No station found")
+            sender.sendRichMessage("No station found")
             return
         }
         sender.sendRichMessage("Station List: <yellow>Click for details")

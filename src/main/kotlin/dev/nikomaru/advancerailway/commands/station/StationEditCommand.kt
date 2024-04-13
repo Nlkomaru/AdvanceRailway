@@ -26,7 +26,7 @@ class StationEditCommand {
     suspend fun setName(sender: CommandSender, stationId: StationId, newName: String) {
         val data = when (val res = StationUtils.getStationData(stationId)) {
             is Either.Left -> {
-                sender.sendMessage("Station not found")
+                sender.sendRichMessage("Station not found")
                 return
             }
 
@@ -35,7 +35,7 @@ class StationEditCommand {
             }
         }
         data.copy(name = newName).save()
-        sender.sendMessage("Station name set")
+        sender.sendRichMessage("Station name set")
     }
 
     @Subcommand("set location")
@@ -48,7 +48,7 @@ class StationEditCommand {
         val world = if (sender is Player) sender.world else Bukkit.getWorld("world")!!
         val data = when (val res = StationUtils.getStationData(stationId)) {
             is Either.Left -> {
-                sender.sendMessage("Station not found")
+                sender.sendRichMessage("Station not found")
                 return
             }
 
@@ -57,14 +57,14 @@ class StationEditCommand {
             }
         }
         data.copy(point = point, world = world).save()
-        sender.sendMessage("Station location set")
+        sender.sendRichMessage("Station location set")
     }
 
     @Subcommand("set numbering")
     suspend fun setNumbering(sender: CommandSender, stationId: StationId, numbering: String) {
         val data = when (val res = StationUtils.getStationData(stationId)) {
             is Either.Left -> {
-                sender.sendMessage("Station not found")
+                sender.sendRichMessage("Station not found")
                 return
             }
 
@@ -73,6 +73,6 @@ class StationEditCommand {
             }
         }
         data.copy(numbering = numbering).save()
-        sender.sendMessage("Station numbering set")
+        sender.sendRichMessage("Station numbering set")
     }
 }

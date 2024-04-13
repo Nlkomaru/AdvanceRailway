@@ -30,7 +30,7 @@ class RailwayEditCommand: KoinComponent {
     suspend fun setLineType(sender: CommandSender, railwayId: RailwayId, lineType: LineType) {
         val data = when (val res = RailwayUtils.getRailwayData(railwayId)) {
             is Either.Left -> {
-                sender.sendMessage("Railway not found")
+                sender.sendRichMessage("Railway not found")
                 return
             }
 
@@ -39,14 +39,14 @@ class RailwayEditCommand: KoinComponent {
             }
         }
         data.copy(lineType = lineType).save()
-        sender.sendMessage("Line type set to $lineType")
+        sender.sendRichMessage("Line type set to $lineType")
     }
 
     @Subcommand("set group")
     suspend fun setGroup(sender: CommandSender, railwayId: RailwayId, groupId: GroupId) {
         val data = when (val res = RailwayUtils.getRailwayData(railwayId)) {
             is Either.Left -> {
-                sender.sendMessage("Railway not found")
+                sender.sendRichMessage("Railway not found")
                 return
             }
 
@@ -55,14 +55,14 @@ class RailwayEditCommand: KoinComponent {
             }
         }
         data.copy(group = groupId).save()
-        sender.sendMessage("Group set to $groupId")
+        sender.sendRichMessage("Group set to $groupId")
     }
 
     @Subcommand("unset group")
     suspend fun unsetGroup(sender: CommandSender, railwayId: RailwayId) {
         val data = when (val res = RailwayUtils.getRailwayData(railwayId)) {
             is Either.Left -> {
-                sender.sendMessage("Railway not found")
+                sender.sendRichMessage("Railway not found")
                 return
             }
 
@@ -71,14 +71,14 @@ class RailwayEditCommand: KoinComponent {
             }
         }
         data.copy(group = null).save()
-        sender.sendMessage("Group unset")
+        sender.sendRichMessage("Group unset")
     }
 
     @Subcommand("set from-station")
     suspend fun setFromStation(sender: CommandSender, railwayId: RailwayId, stationId: StationId) {
         val data = when (val res = RailwayUtils.getRailwayData(railwayId)) {
             is Either.Left -> {
-                sender.sendMessage("Railway not found")
+                sender.sendRichMessage("Railway not found")
                 return
             }
 
@@ -87,7 +87,7 @@ class RailwayEditCommand: KoinComponent {
             }
         }
         data.copy(fromStation = stationId).save()
-        sender.sendMessage("From station set to $stationId")
+        sender.sendRichMessage("From station set to $stationId")
 
     }
 
@@ -95,7 +95,7 @@ class RailwayEditCommand: KoinComponent {
     suspend fun setToStation(sender: CommandSender, railwayId: RailwayId, stationId: StationId) {
         val data = when (val res = RailwayUtils.getRailwayData(railwayId)) {
             is Either.Left -> {
-                sender.sendMessage("Railway not found")
+                sender.sendRichMessage("Railway not found")
                 return
             }
 
@@ -104,7 +104,7 @@ class RailwayEditCommand: KoinComponent {
             }
         }
         data.copy(fromStation = stationId).save()
-        sender.sendMessage("From station set to $stationId")
+        sender.sendRichMessage("From station set to $stationId")
 
     }
 }

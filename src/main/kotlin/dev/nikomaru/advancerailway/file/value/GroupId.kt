@@ -9,6 +9,7 @@
 
 package dev.nikomaru.advancerailway.file.value
 
+import dev.nikomaru.advancerailway.utils.GroupUtils
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.descriptors.PrimitiveKind
@@ -17,9 +18,10 @@ import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 
-@JvmInline
 @Serializable(with = GroupNameSerializer::class)
-value class GroupId(val value: String)
+class GroupId(val value: String) {
+    suspend fun toData() = GroupUtils.getGroupData(this).getOrNull()
+}
 
 object GroupNameSerializer: KSerializer<GroupId> {
     override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("RailwayName", PrimitiveKind.STRING)

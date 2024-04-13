@@ -18,13 +18,17 @@ import xyz.jpenilla.squaremap.api.Key
 import xyz.jpenilla.squaremap.api.Point
 import xyz.jpenilla.squaremap.api.SimpleLayerProvider
 import xyz.jpenilla.squaremap.api.marker.Marker
+import xyz.jpenilla.squaremap.api.marker.MarkerOptions
+import java.awt.Color
+import java.util.*
+import kotlin.math.ceil
 
 class RailwayDataLoader: KoinComponent {
     private val plugin: AdvanceRailway by inject()
     private val provider: SimpleLayerProvider by inject()
     private val dataFolder = plugin.dataFolder.resolve("data").resolve("railways")
 
-    fun load() {
+    suspend fun load() {
         if (!dataFolder.exists()) {
             dataFolder.mkdirs()
         }
@@ -32,6 +36,21 @@ class RailwayDataLoader: KoinComponent {
             val data = json.decodeFromString<RailwayData>(file.readText())
             val key = Key.of(data.id.value)
             val marker = Marker.multiPolyline(data.line.points.map { Point.of(it.x, it.z) })
+            val option = MarkerOptions.builder().clickTooltip("""
+                行き先 : ${data.toStation.toData()?.name} -> ${data.fromStation.toData()?.name}</span><br/>
+                所要時間 : 約 ${ceil(data.timeRequired / 6.0) / 10} 分</span><br/>
+                ${data.group?.let { "${it.toData()?.name}" } ?: ""}
+            """.trimIndent())
+            val random = Random()
+            random.setSeed(data.group.hashCode().toLong())
+            data.group?.let {
+                option.fillColor(
+                    it.toData()?.railwayColor ?: Color(
+                        random.nextInt(256), random.nextInt(256), random.nextInt(256)
+                    )
+                )
+            }
+            marker.markerOptions(option)
             provider.addMarker(key, marker)
         }
     }

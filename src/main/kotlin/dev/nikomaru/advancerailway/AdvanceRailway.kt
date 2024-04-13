@@ -56,8 +56,7 @@ open class AdvanceRailway: SuspendingJavaPlugin() {
         val squaremapApi = SquaremapProvider.get()
         val world = Bukkit.getWorld("world")
         val mapWorld: MapWorld = squaremapApi.getWorldIfEnabled(BukkitAdapter.worldIdentifier(world)).orElse(null)
-        val provider =
-            SimpleLayerProvider.builder("advanced Railway").layerPriority(1).defaultHidden(true).zIndex(0).build()
+        val provider = SimpleLayerProvider.builder("Railway").defaultHidden(true).build()
         mapWorld.layerRegistry().register(Key.of("Railway"), provider)
 
         loadKoinModules(module {
@@ -99,8 +98,8 @@ open class AdvanceRailway: SuspendingJavaPlugin() {
                 command.description,
             )
         }
-        handler.registerPoint3DParser()
         handler.registerRailwayIdParser()
+        handler.registerPoint3DParser()
         handler.registerStationIdParser()
         handler.registerGroupIdParser()
 

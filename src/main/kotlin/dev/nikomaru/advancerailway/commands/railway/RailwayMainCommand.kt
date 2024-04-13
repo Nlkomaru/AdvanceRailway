@@ -34,10 +34,10 @@ class RailwayMainCommand: KoinComponent {
         sender: CommandSender, railwayId: String, startPoint: Point3D, directionPoint: Point3D, endPoint: Point3D
     ) {
         railwayId.matches(Regex("[a-zA-Z0-9_]+")) || run {
-            sender.sendMessage("Error: Invalid railway ID \"[a-zA-Z0-9_]+\"")
+            sender.sendRichMessage("Error: Invalid railway ID \"[a-zA-Z0-9_]+\"")
             return
         }
-        sender.sendMessage("Registering railway...")
+        sender.sendRichMessage("Registering railway...")
         handleRailway(sender, railwayId, startPoint, directionPoint, endPoint, "Registered")
     }
 
@@ -45,7 +45,7 @@ class RailwayMainCommand: KoinComponent {
     suspend fun update(
         sender: CommandSender, railwayId: String, startPoint: Point3D, directionPoint: Point3D, endPoint: Point3D
     ) {
-        sender.sendMessage("Updating railway...")
+        sender.sendRichMessage("Updating railway...")
         handleRailway(sender, railwayId, startPoint, directionPoint, endPoint, "Updated")
     }
 
@@ -58,16 +58,16 @@ class RailwayMainCommand: KoinComponent {
         action: String
     ) {
         val line = RailwayUtils.getLine(startPoint, directionPoint, endPoint).getOrNull() ?: run {
-            sender.sendMessage("Error: Failed to get line")
+            sender.sendRichMessage("Error: Failed to get line")
             return
         }
         val world = if (sender is Player) sender.world else Bukkit.getWorlds().first()
         val fromStation = StationUtils.nearStation(startPoint.toLocation(world)).getOrNull() ?: run {
-            sender.sendMessage("Error: Failed to find start station")
+            sender.sendRichMessage("Error: Failed to find start station")
             return
         }
         val toStation = StationUtils.nearStation(endPoint.toLocation(world)).getOrNull() ?: run {
-            sender.sendMessage("Error: Failed to find end station")
+            sender.sendRichMessage("Error: Failed to find end station")
             return
         }
         val railwayData = RailwayData(
@@ -84,17 +84,17 @@ class RailwayMainCommand: KoinComponent {
             directionPoint = directionPoint
         )
         railwayData.save()
-        sender.sendMessage("$action railway: $railwayId")
+        sender.sendRichMessage("$action railway: $railwayId")
     }
 
     @Subcommand("remove")
     fun remove(sender: CommandSender, railwayId: String) {
         val file = plugin.dataFolder.resolve("data").resolve("railways").resolve("$railwayId.json")
         if (!file.exists()) {
-            sender.sendMessage("Error: Railway not found")
+            sender.sendRichMessage("Error: Railway not found")
             return
         }
         file.delete()
-        sender.sendMessage("Removed railway: $railwayId")
+        sender.sendRichMessage("Removed railway: $railwayId")
     }
 }

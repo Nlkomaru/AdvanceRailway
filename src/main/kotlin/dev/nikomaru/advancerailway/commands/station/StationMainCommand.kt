@@ -38,18 +38,18 @@ class StationMainCommand: KoinComponent {
         val stationId = StationId(id)
         val data = StationData(stationId, name, null, world, point, null, null)
         data.save()
-        sender.sendMessage("Station added")
+        sender.sendRichMessage("Station added")
     }
 
     @Subcommand("remove")
     fun remove(sender: CommandSender, id: StationId) { // Remove station
         val file = plugin.dataFolder.resolve("data").resolve("stations").resolve("${id.value}.json")
         if (!file.exists()) {
-            sender.sendMessage("Station not found")
+            sender.sendRichMessage("Station not found")
             return
         }
         file.delete()
-        sender.sendMessage("Station removed")
+        sender.sendRichMessage("Station removed")
     }
 
 }

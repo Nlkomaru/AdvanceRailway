@@ -29,10 +29,10 @@ class GeneralCommand: KoinComponent {
 
     @Subcommand("info")
     fun info(sender: CommandSender) {
-        sender.sendMessage("AdvanceRailway Information")
-        sender.sendMessage("Version: ${plugin.pluginMeta.version}")
-        sender.sendMessage("Author: ${plugin.pluginMeta.authors.joinToString(",")}")
-        sender.sendMessage("Website: ${plugin.pluginMeta.website}")
+        sender.sendRichMessage("AdvanceRailway Information")
+        sender.sendRichMessage("Version: ${plugin.pluginMeta.version}")
+        sender.sendRichMessage("Author: ${plugin.pluginMeta.authors.joinToString(",")}")
+        sender.sendRichMessage("Website: ${plugin.pluginMeta.website}")
 
     }
 
@@ -46,7 +46,7 @@ class GeneralCommand: KoinComponent {
     @Subcommand("inspect")
     fun detect(sender: CommandSender) {
         if (sender !is Player) {
-            sender.sendMessage("This command can only be executed by players.")
+            sender.sendRichMessage("This command can only be executed by players.")
             return
         }
         sender.sendRichMessage("Click on a block to detect the railway.")
@@ -54,13 +54,13 @@ class GeneralCommand: KoinComponent {
     }
 
     @Subcommand("reload")
-    fun reload(sender: CommandSender) {
+    suspend fun reload(sender: CommandSender) {
         FileLoader.load()
-        sender.sendMessage("Reloaded map and config data.")
+        sender.sendRichMessage("Reloaded map and config data.")
     }
 
     @Subcommand("export")
     fun export(sender: CommandSender, type: ExportFileType) { //TODO: Implement export
-        sender.sendMessage("This feature is not implemented yet.")
+        sender.sendRichMessage("This feature is not implemented yet.")
     }
 }

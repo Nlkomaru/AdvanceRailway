@@ -27,24 +27,24 @@ class GroupMainCommand: KoinComponent {
     @Subcommand("add")
     fun add(sender: CommandSender, id: String, name: String) {
         id.matches(Regex("[a-zA-Z0-9_]+")) || run {
-            sender.sendMessage("Error: Invalid railway ID \"[a-zA-Z0-9_]+\"")
+            sender.sendRichMessage("Error: Invalid railway ID \"[a-zA-Z0-9_]+\"")
             return
         }
         val groupId = GroupId(id)
         val data = GroupData(groupId, name, Color.getHSBColor(Math.random().toFloat(), 1.0f, 1.0f))
         data.save()
-        sender.sendMessage("Group added")
+        sender.sendRichMessage("Group added")
     }
 
     @Subcommand("remove")
     fun remove(sender: CommandSender, id: StationId) {
         val file = plugin.dataFolder.resolve("data").resolve("groups").resolve("${id.value}.json")
         if (!file.exists()) {
-            sender.sendMessage("Group not found")
+            sender.sendRichMessage("Group not found")
             return
         }
         file.delete()
-        sender.sendMessage("Group removed")
+        sender.sendRichMessage("Group removed")
     }
 
 }
