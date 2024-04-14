@@ -13,6 +13,7 @@ import dev.nikomaru.advancerailway.AdvanceRailway
 import dev.nikomaru.advancerailway.file.FileLoader
 import dev.nikomaru.advancerailway.file.type.ExportFileType
 import dev.nikomaru.advancerailway.listener.RailClickEvent
+import dev.nikomaru.advancerailway.utils.Utils.toPoint3D
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import org.koin.core.component.KoinComponent
@@ -35,7 +36,20 @@ class GeneralCommand: KoinComponent {
         sender.sendRichMessage("Version: ${plugin.pluginMeta.version}")
         sender.sendRichMessage("Author: ${plugin.pluginMeta.authors.joinToString(",")}")
         sender.sendRichMessage("Website: ${plugin.pluginMeta.website}")
+    }
 
+    @Subcommand("targetBlock")
+    fun targetBlock(sender: CommandSender) {
+        if (sender !is Player) {
+            sender.sendRichMessage("This command can only be executed by players.")
+            return
+        }
+        val block = sender.getTargetBlockExact(10)
+        val location = block?.location ?: run {
+            sender.sendRichMessage("No block found.")
+            return
+        }
+        sender.sendRichMessage("Block: ${location.toPoint3D().toPlainString()}")
     }
 
     @Subcommand("help")

@@ -22,8 +22,6 @@ import xyz.jpenilla.squaremap.api.Point
 import xyz.jpenilla.squaremap.api.SimpleLayerProvider
 import xyz.jpenilla.squaremap.api.marker.Marker
 import xyz.jpenilla.squaremap.api.marker.MarkerOptions
-import java.awt.Color
-import java.util.*
 
 
 class StationDataLoader: KoinComponent {
@@ -51,9 +49,7 @@ class StationDataLoader: KoinComponent {
         stationDataFolder.listFiles()?.forEach { file ->
             val stationData = json.decodeFromString<StationData>(file.readText())
             val key = Key.of(stationData.stationId.value)
-            val random = Random()
-            random.setSeed(stationData.stationId.hashCode().toLong())
-            val color = stationData.color ?: Color(random.nextInt(256), random.nextInt(256), random.nextInt(256))
+            val color = stationData.color
             val colorOption = MarkerOptions.builder().fillColor(color.brighter()).strokeColor(color).clickTooltip(
                 """
                 ${if (stationData.numbering != null) "${stationData.numbering}</span><br/>" else ""}

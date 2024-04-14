@@ -22,6 +22,7 @@ import org.bukkit.World
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.awt.Color
+import kotlin.random.Random
 
 @Serializable
 data class StationData(
@@ -31,7 +32,11 @@ data class StationData(
     val world: @Serializable(with = WorldSerializer::class) World,
     val point: Point3D,
     val overrideSize: Double?,
-    val color: @Serializable(with = ColorSerializer::class) Color?,
+    val color: @Serializable(with = ColorSerializer::class) Color = Color(
+        Random.nextInt(256),
+        Random.nextInt(256),
+        Random.nextInt(256)
+    )
 ): KoinComponent {
     val plugin: AdvanceRailway by inject()
 

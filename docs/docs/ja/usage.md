@@ -28,16 +28,27 @@
 
 ### 路線の追加
 
-`ar railway register <railwayId> <group> <start> <direction> <end>`を使用して路線を追加します
+`ar railway register <railwayId> <start> <direction> <end>`を使用して路線を追加します
 
 - `id` : 路線のID
-- `group` : 路線のグループ
 - `start` : 路線の始点
 - `direction` : 路線の方向
 - `end` : 路線の終点
 
 始点と終点は、与えられた座標から最も近い駅が選択されます。
 異なる駅の場合は後述する方法で変更できます。
+
+### グループへの追加
+
+`ar railway set group <railwayId> <groupId>`
+`ar group join <groupId> <railwayId...>`
+この2つのコマンドが、路線をグループに追加する方法です。
+
+### 路線の色の変更
+
+`ar group color <groupId> <r> <g> <b>`を使用して路線の色を変更します
+
+
 
 
 

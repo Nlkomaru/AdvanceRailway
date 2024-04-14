@@ -20,7 +20,6 @@ import org.bukkit.entity.Player
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import revxrsal.commands.annotation.Command
-import revxrsal.commands.annotation.Optional
 import revxrsal.commands.annotation.Subcommand
 import revxrsal.commands.bukkit.annotation.CommandPermission
 
@@ -30,7 +29,7 @@ class StationMainCommand: KoinComponent {
     val plugin: AdvanceRailway by inject()
 
     @Subcommand("add")
-    fun add(sender: CommandSender, id: String, name: String, @Optional inputPoint: Point3D?) { // Add station
+    fun add(sender: CommandSender, id: String, name: String, inputPoint: Point3D?) { // Add station
         if (sender !is Player && inputPoint == null) {
             println("You must enter the point")
             return
@@ -38,7 +37,7 @@ class StationMainCommand: KoinComponent {
         val point = inputPoint ?: (sender as Player).location.toPoint3D()
         val world = if (sender is Player) sender.world else Bukkit.getWorld("world")!!
         val stationId = StationId(id)
-        val data = StationData(stationId, name, null, world, point, null, null)
+        val data = StationData(stationId, name, null, world, point, null)
         data.save()
         sender.sendRichMessage("Station added")
     }

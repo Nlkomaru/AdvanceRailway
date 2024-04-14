@@ -79,8 +79,7 @@ class RailwayMainCommand: KoinComponent {
             lineType = LineType.UP_DOWN_LINE,
             line = line,
             fromStation = fromStation,
-            toStation = toStation,
-            timeRequired = line.getLength().toLong() / 10,
+            toStation = toStation, timeRequired = line.getLength().toLong() / 8,
             startPoint = startPoint,
             endPoint = endPoint,
             directionPoint = directionPoint
