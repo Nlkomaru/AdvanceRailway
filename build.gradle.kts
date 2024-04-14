@@ -68,6 +68,14 @@ java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(17))
 }
 
+kotlin {
+    sourceSets.all {
+        languageSettings {
+            languageVersion = "2.0"
+        }
+    }
+}
+
 tasks {
     compileKotlin {
         kotlinOptions.jvmTarget = "17"
