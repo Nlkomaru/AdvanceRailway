@@ -26,13 +26,17 @@ import kotlin.math.ceil
 class RailwayDataLoader: KoinComponent {
     private val plugin: AdvanceRailway by inject()
     private val provider: SimpleLayerProvider by inject()
-    private val dataFolder = plugin.dataFolder.resolve("data").resolve("railways")
+    private val railwayDataFolder = plugin.dataFolder.resolve("data").resolve("railways")
+    private val groupDataFolder = plugin.dataFolder.resolve("data").resolve("groups")
 
     suspend fun load() {
-        if (!dataFolder.exists()) {
-            dataFolder.mkdirs()
+        if (!railwayDataFolder.exists()) {
+            railwayDataFolder.mkdirs()
         }
-        dataFolder.listFiles()?.forEach { file ->
+        if (!groupDataFolder.exists()) {
+            groupDataFolder.mkdirs()
+        }
+        railwayDataFolder.listFiles()?.forEach { file ->
             val data = json.decodeFromString<RailwayData>(file.readText())
             val key = Key.of(data.id.value)
             val marker = Marker.multiPolyline(data.line.points.map { Point.of(it.x, it.z) })

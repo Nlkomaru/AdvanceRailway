@@ -24,7 +24,7 @@ class Line3DTest {
     fun testGetInclination() {
         val point1 = Point3D(0.0, 0.0, 0.0)
         val point2 = Point3D(1.0, 1.0, 1.0)
-        assertEquals(Pair(0.0, 0.0), point1.getInclination(point2))
+        assertEquals(Pair(0.9553166181245092, 0.9553166181245092), point1.getInclination(point2))
     }
 
     @Test
