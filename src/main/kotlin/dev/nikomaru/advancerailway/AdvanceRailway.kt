@@ -77,6 +77,7 @@ open class AdvanceRailway: SuspendingJavaPlugin() {
     }
 
     override suspend fun onDisableAsync() { // Plugin shutdown logic
+
     }
 
     private fun setCommand() {

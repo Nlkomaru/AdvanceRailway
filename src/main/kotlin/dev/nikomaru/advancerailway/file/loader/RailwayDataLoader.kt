@@ -29,7 +29,9 @@ class RailwayDataLoader: KoinComponent {
     private val railwayDataFolder = plugin.dataFolder.resolve("data").resolve("railways")
     private val groupDataFolder = plugin.dataFolder.resolve("data").resolve("groups")
 
+
     suspend fun load() {
+        provider.clearMarkers()
         if (!railwayDataFolder.exists()) {
             railwayDataFolder.mkdirs()
         }
@@ -41,7 +43,7 @@ class RailwayDataLoader: KoinComponent {
             val key = Key.of(data.id.value)
             val marker = Marker.multiPolyline(data.line.points.map { Point.of(it.x, it.z) })
             val option = MarkerOptions.builder().clickTooltip("""
-                行き先 : ${data.toStation.toData()?.name} -> ${data.fromStation.toData()?.name}</span><br/>
+                行き先 : ${data.fromStation.toData()?.name} -> ${data.toStation.toData()?.name}</span><br/>
                 所要時間 : 約 ${ceil(data.timeRequired / 6.0) / 10} 分</span><br/>
                 ${data.group?.let { "${it.toData()?.name}" } ?: ""}
             """.trimIndent())

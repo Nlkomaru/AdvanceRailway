@@ -35,6 +35,7 @@ class StationDataLoader: KoinComponent {
     private val joinedCount = hashMapOf<StationId, Int>()
 
     fun load() {
+        provider.clearMarkers()
         if (!stationDataFolder.exists()) {
             stationDataFolder.mkdirs()
         }
