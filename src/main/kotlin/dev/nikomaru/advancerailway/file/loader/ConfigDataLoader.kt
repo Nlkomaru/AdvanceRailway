@@ -24,6 +24,7 @@ class ConfigDataLoader: KoinComponent {
     fun load() {
         val file = plugin.dataFolder.resolve("config.json")
         if (!file.exists()) {
+            file.parentFile.mkdirs()
             file.createNewFile()
             val data = ConfigData(1000)
             val str = json.encodeToString(data)

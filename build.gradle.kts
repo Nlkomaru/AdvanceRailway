@@ -106,7 +106,7 @@ bukkit {
     authors = listOf("Nikomaru")
 
     permissions {
-        register("RaceAssist.admin") {
+        register("advancerailway.admin") {
             default = BukkitPluginDescription.Permission.Default.OP
             children = listOf(
                 "advancerailway.command.group",
