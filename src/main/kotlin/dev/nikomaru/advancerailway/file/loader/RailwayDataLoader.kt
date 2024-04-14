@@ -11,6 +11,7 @@ package dev.nikomaru.advancerailway.file.loader
 
 import dev.nikomaru.advancerailway.AdvanceRailway
 import dev.nikomaru.advancerailway.file.data.RailwayData
+import dev.nikomaru.advancerailway.file.type.LineType
 import dev.nikomaru.advancerailway.utils.Utils.json
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -31,7 +32,6 @@ class RailwayDataLoader: KoinComponent {
 
 
     suspend fun load() {
-        provider.clearMarkers()
         if (!railwayDataFolder.exists()) {
             railwayDataFolder.mkdirs()
         }
@@ -42,8 +42,12 @@ class RailwayDataLoader: KoinComponent {
             val data = json.decodeFromString<RailwayData>(file.readText())
             val key = Key.of(data.id.value)
             val marker = Marker.multiPolyline(data.line.points.map { Point.of(it.x, it.z) })
+            val arrow = when (data.lineType) {
+                LineType.UP_DOWN_LINE -> "<->"
+                else -> "->"
+            }
             val option = MarkerOptions.builder().clickTooltip("""
-                行き先 : ${data.fromStation.toData()?.name} -> ${data.toStation.toData()?.name}</span><br/>
+                行き先 : ${data.fromStation.toData()?.name} $arrow ${data.toStation.toData()?.name}</span><br/>
                 所要時間 : 約 ${ceil(data.timeRequired / 6.0) / 10} 分</span><br/>
                 ${data.group?.let { "${it.toData()?.name}" } ?: ""}
             """.trimIndent())

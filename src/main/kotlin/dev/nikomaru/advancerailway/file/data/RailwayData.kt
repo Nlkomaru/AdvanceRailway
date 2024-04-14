@@ -12,6 +12,7 @@ package dev.nikomaru.advancerailway.file.data
 import dev.nikomaru.advancerailway.AdvanceRailway
 import dev.nikomaru.advancerailway.Line3D
 import dev.nikomaru.advancerailway.Point3D
+import dev.nikomaru.advancerailway.file.FileLoader
 import dev.nikomaru.advancerailway.file.type.LineType
 import dev.nikomaru.advancerailway.file.utils.WorldSerializer
 import dev.nikomaru.advancerailway.file.value.GroupId
@@ -38,9 +39,10 @@ data class RailwayData(
 ): KoinComponent {
     val plugin: AdvanceRailway by inject()
 
-    fun save() {
+    suspend fun save() {
         val file = plugin.dataFolder.resolve("data").resolve("railways").resolve("${id.value}.json")
         file.writeText(json.encodeToString(this))
+        FileLoader.mapDataLoad()
     }
 
     companion object {

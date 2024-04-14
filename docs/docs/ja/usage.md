@@ -41,8 +41,7 @@
 ### グループへの追加
 
 `ar railway set group <railwayId> <groupId>`
-`ar group join <groupId> <railwayId...>`
-この2つのコマンドが、路線をグループに追加する方法です。
+路線をグループに追加する方法です。
 
 ### 路線の色の変更
 

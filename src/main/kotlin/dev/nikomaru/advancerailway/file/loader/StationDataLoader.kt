@@ -33,7 +33,6 @@ class StationDataLoader: KoinComponent {
     private val joinedCount = hashMapOf<StationId, Int>()
 
     fun load() {
-        provider.clearMarkers()
         if (!stationDataFolder.exists()) {
             stationDataFolder.mkdirs()
         }
@@ -56,11 +55,12 @@ class StationDataLoader: KoinComponent {
                 名前 : ${stationData.name}</span><br/>
                 """.trimIndent()
             )
-            val marker = Marker.circle(
-                Point.of(stationData.point.x, stationData.point.z),
-                config.circleDefault * (joinedCount[stationData.stationId] ?: 1)
-            ).markerOptions(colorOption)
-
+            val size = stationData.overrideSize ?: joinedCount[stationData.stationId]?.let {
+                config.circleDefault.times(it)
+            } ?: 1.0
+            plugin.logger.info("size of ${stationData.stationId.value}: $size")
+            val marker =
+                Marker.circle(Point.of(stationData.point.x, stationData.point.z), size).markerOptions(colorOption)
             provider.addMarker(key, marker)
         }
     }

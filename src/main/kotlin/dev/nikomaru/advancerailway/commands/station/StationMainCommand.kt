@@ -11,6 +11,7 @@ package dev.nikomaru.advancerailway.commands.station
 
 import dev.nikomaru.advancerailway.AdvanceRailway
 import dev.nikomaru.advancerailway.Point3D
+import dev.nikomaru.advancerailway.file.FileLoader
 import dev.nikomaru.advancerailway.file.data.StationData
 import dev.nikomaru.advancerailway.file.value.StationId
 import dev.nikomaru.advancerailway.utils.Utils.toPoint3D
@@ -20,6 +21,7 @@ import org.bukkit.entity.Player
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import revxrsal.commands.annotation.Command
+import revxrsal.commands.annotation.Optional
 import revxrsal.commands.annotation.Subcommand
 import revxrsal.commands.bukkit.annotation.CommandPermission
 
@@ -29,7 +31,9 @@ class StationMainCommand: KoinComponent {
     val plugin: AdvanceRailway by inject()
 
     @Subcommand("add")
-    fun add(sender: CommandSender, id: String, name: String, inputPoint: Point3D?) { // Add station
+    suspend fun add(
+        sender: CommandSender, id: String, name: String, @Optional inputPoint: Point3D? = null
+    ) { // Add station
         if (sender !is Player && inputPoint == null) {
             println("You must enter the point")
             return
@@ -43,13 +47,14 @@ class StationMainCommand: KoinComponent {
     }
 
     @Subcommand("remove")
-    fun remove(sender: CommandSender, id: StationId) { // Remove station
+    suspend fun remove(sender: CommandSender, id: StationId) { // Remove station
         val file = plugin.dataFolder.resolve("data").resolve("stations").resolve("${id.value}.json")
         if (!file.exists()) {
             sender.sendRichMessage("Station not found")
             return
         }
         file.delete()
+        FileLoader.mapDataLoad()
         sender.sendRichMessage("Station removed")
     }
 

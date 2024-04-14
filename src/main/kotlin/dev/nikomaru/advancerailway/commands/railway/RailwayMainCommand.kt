@@ -12,6 +12,7 @@ package dev.nikomaru.advancerailway.commands.railway
 
 import dev.nikomaru.advancerailway.AdvanceRailway
 import dev.nikomaru.advancerailway.Point3D
+import dev.nikomaru.advancerailway.file.FileLoader
 import dev.nikomaru.advancerailway.file.data.RailwayData
 import dev.nikomaru.advancerailway.file.type.LineType
 import dev.nikomaru.advancerailway.file.value.RailwayId
@@ -89,13 +90,14 @@ class RailwayMainCommand: KoinComponent {
     }
 
     @Subcommand("remove")
-    fun remove(sender: CommandSender, railwayId: String) {
+    suspend fun remove(sender: CommandSender, railwayId: String) {
         val file = plugin.dataFolder.resolve("data").resolve("railways").resolve("$railwayId.json")
         if (!file.exists()) {
             sender.sendRichMessage("Error: Railway not found")
             return
         }
         file.delete()
+        FileLoader.mapDataLoad()
         sender.sendRichMessage("Removed railway: $railwayId")
     }
 }

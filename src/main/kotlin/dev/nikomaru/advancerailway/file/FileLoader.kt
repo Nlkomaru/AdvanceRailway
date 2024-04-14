@@ -12,10 +12,21 @@ package dev.nikomaru.advancerailway.file
 import dev.nikomaru.advancerailway.file.loader.ConfigDataLoader
 import dev.nikomaru.advancerailway.file.loader.RailwayDataLoader
 import dev.nikomaru.advancerailway.file.loader.StationDataLoader
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
+import xyz.jpenilla.squaremap.api.SimpleLayerProvider
 
-object FileLoader {
+object FileLoader: KoinComponent {
+    private val provider: SimpleLayerProvider by inject()
     suspend fun load() {
+        provider.clearMarkers()
         ConfigDataLoader().load()
+        StationDataLoader().load()
+        RailwayDataLoader().load()
+    }
+
+    suspend fun mapDataLoad() {
+        provider.clearMarkers()
         StationDataLoader().load()
         RailwayDataLoader().load()
     }

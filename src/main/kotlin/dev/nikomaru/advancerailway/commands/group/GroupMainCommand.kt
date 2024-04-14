@@ -10,6 +10,7 @@
 package dev.nikomaru.advancerailway.commands.group
 
 import dev.nikomaru.advancerailway.AdvanceRailway
+import dev.nikomaru.advancerailway.file.FileLoader
 import dev.nikomaru.advancerailway.file.data.GroupData
 import dev.nikomaru.advancerailway.file.value.GroupId
 import dev.nikomaru.advancerailway.file.value.StationId
@@ -39,13 +40,14 @@ class GroupMainCommand: KoinComponent {
     }
 
     @Subcommand("remove")
-    fun remove(sender: CommandSender, id: StationId) {
+    suspend fun remove(sender: CommandSender, id: StationId) {
         val file = plugin.dataFolder.resolve("data").resolve("groups").resolve("${id.value}.json")
         if (!file.exists()) {
             sender.sendRichMessage("Group not found")
             return
         }
         file.delete()
+        FileLoader.mapDataLoad()
         sender.sendRichMessage("Group removed")
     }
 

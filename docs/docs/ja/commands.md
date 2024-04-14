@@ -46,6 +46,5 @@
 - [x] `ar group remove <groupId>` グループを削除します。
 - [x] `ar group set name <groupId> <oldName> <newName>` グループの名前を変更します。
 - [x] `ar group set color <groupId> <r> <g> <b>` グループの色を変更します。
-- [x] `ar group join <groupId> <stationId...> ` グループに駅を追加します。
 - [x] `ar group info <groupId>` グループの情報を表示します。
 - [x] `ar group list` グループの一覧を表示します。

@@ -11,7 +11,6 @@ package dev.nikomaru.advancerailway.commands.group
 
 import arrow.core.Either
 import dev.nikomaru.advancerailway.file.value.GroupId
-import dev.nikomaru.advancerailway.file.value.RailwayId
 import dev.nikomaru.advancerailway.utils.GroupUtils
 import org.bukkit.command.CommandSender
 import revxrsal.commands.annotation.Command
@@ -55,16 +54,4 @@ class GroupEditCommand {
         sender.sendRichMessage("group color set")
     }
 
-    @Subcommand("join")
-    suspend fun join(sender: CommandSender, groupId: GroupId, vararg railwayId: RailwayId) {
-        val list = railwayId.toList()
-        list.forEach {
-            val data = it.toData()
-            if (data != null) {
-                data.copy(group = groupId).save()
-            } else {
-                sender.sendRichMessage("Railway not found in ${it.value}")
-            }
-        }
-    }
 }
