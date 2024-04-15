@@ -20,6 +20,13 @@ jobs:
       - name: Change wrapper permissions
         run: chmod +x ./gradlew
 
+      - name: change plugin.yml version
+        run: |
+          before="${{ github.event.release.tag_name }}"
+          after="${before//v/}"
+          sed -i -e "s/minecraft_plugin_version/$after/i" './build.gradle.kts'
+          cat ./build.gradle.kts
+
       - name: Build with Gradle
         run: ./gradlew build -x test
 

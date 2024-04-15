@@ -48,6 +48,7 @@ dependencies {
     implementation(libs.lamp.bukkit)
 
     implementation(libs.kotlinx.serialization.json)
+    implementation(libs.kotlinx.serialization.csv)
 
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.mccoroutine.bukkit.api)

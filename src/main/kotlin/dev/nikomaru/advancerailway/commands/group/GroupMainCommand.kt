@@ -29,8 +29,8 @@ class GroupMainCommand: KoinComponent {
 
     @Subcommand("add")
     fun add(sender: CommandSender, id: String, name: String) {
-        id.matches(Regex("[a-zA-Z0-9_]+")) || run {
-            sender.sendRichMessage("Error: Invalid railway ID \"[a-zA-Z0-9_]+\"")
+        id.matches(Regex("[a-zA-Z0-9_-]+")) || run {
+            sender.sendRichMessage("Error: Invalid group ID \"[a-zA-Z0-9_-]+\"")
             return
         }
         val groupId = GroupId(id)
