@@ -1,4 +1,5 @@
 site_name: AdvanceRailway Docs
+site_url: https://advance-railway.nikomaru.page
 theme:
   name: material
   language: en
@@ -8,6 +9,7 @@ theme:
   features:
     - navigation.tabs
     - content.code.copy
+    - navigation.instant.preview
   palette:
     - scheme: default
       primary: green
@@ -24,6 +26,7 @@ theme:
 markdown_extensions:
   - pymdownx.highlight:
       anchor_linenums: true
+  - admonition
   - pymdownx.inlinehilite
   - pymdownx.superfences
   - pymdownx.tasklist:
@@ -32,6 +35,7 @@ markdown_extensions:
 plugins:
   - search:
       lang: en
+  - awesome-pages
   - i18n:
       docs_structure: folder
       languages:
@@ -42,6 +46,7 @@ plugins:
           default: true
           name: 日本語
           build: true
+
 repo_url: https://github.com/Nlkomaru/AdvanceRailway
 repo_name: AdvanceRailway
 copyright: No Rights Reserved(CC0).  Written by Nikomaru in 2024

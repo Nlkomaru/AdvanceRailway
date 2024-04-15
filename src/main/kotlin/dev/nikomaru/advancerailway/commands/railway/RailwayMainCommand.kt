@@ -36,8 +36,8 @@ class RailwayMainCommand: KoinComponent {
     suspend fun register(
         sender: CommandSender, railwayId: String, startPoint: Point3D, directionPoint: Point3D, endPoint: Point3D
     ) {
-        railwayId.matches(Regex("[a-zA-Z0-9_]+")) || run {
-            sender.sendRichMessage("Error: Invalid railway ID \"[a-zA-Z0-9_]+\"")
+        railwayId.matches(Regex("[a-zA-Z0-9_-]+")) || run {
+            sender.sendRichMessage("Error: Invalid railway ID \"[a-zA-Z0-9_-]+\"")
             return
         }
         sender.sendRichMessage("Registering railway...")

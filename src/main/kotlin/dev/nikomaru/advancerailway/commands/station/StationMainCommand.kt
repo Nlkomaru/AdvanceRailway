@@ -38,6 +38,10 @@ class StationMainCommand: KoinComponent {
             println("You must enter the point")
             return
         }
+        id.matches(Regex("[a-zA-Z0-9_-]+")) || run {
+            sender.sendRichMessage("Error: Invalid station ID \"[a-zA-Z0-9_-]+\"")
+            return
+        }
         val point = inputPoint ?: (sender as Player).location.toPoint3D()
         val world = if (sender is Player) sender.world else Bukkit.getWorld("world")!!
         val stationId = StationId(id)

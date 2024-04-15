@@ -14,6 +14,7 @@ squaremap-api = { group = "xyz.jpenilla", name = "squaremap-api", version = "1.2
 lamp-common = { group = "com.github.Revxrsal.Lamp", name = "common", version.ref = "lampVersion" }
 lamp-bukkit = { group = "com.github.Revxrsal.Lamp", name = "bukkit", version.ref = "lampVersion" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "serializationVersion" }
+kotlinx-serialization-csv = { group = "app.softwork", name = "kotlinx-serialization-csv", version = "LATEST" }
 kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutineVersion" }
 mccoroutine-bukkit-api = { group = "com.github.shynixn.mccoroutine", name = "mccoroutine-bukkit-api", version.ref = "mccoroutineVersion" }
 mccoroutine-bukkit-core = { group = "com.github.shynixn.mccoroutine", name = "mccoroutine-bukkit-core", version.ref = "mccoroutineVersion" }

@@ -53,13 +53,12 @@ class RailwayDataLoader: KoinComponent {
             """.trimIndent())
             val random = Random()
             random.setSeed(data.group.hashCode().toLong())
-            data.group?.let {
-                option.fillColor(
-                    it.toData()?.railwayColor ?: Color(
-                        random.nextInt(256), random.nextInt(256), random.nextInt(256)
-                    )
-                )
-            }
+            val randomColor = Color(
+                random.nextInt(256), random.nextInt(256), random.nextInt(256)
+            )
+            val color = data.group?.let { it.toData()?.railwayColor ?: randomColor } ?: randomColor
+            option.fillColor(color)
+            option.strokeColor(color)
             marker.markerOptions(option)
             provider.addMarker(key, marker)
         }
