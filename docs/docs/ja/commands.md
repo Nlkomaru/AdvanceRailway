@@ -2,11 +2,9 @@
 
 - [x] は実装済み
 - [ ] は未実装<br>
-  `[]` 内はオプショナル引数です。
-  `<>` 内は必須引数です。
-  `arg...` は複数の引数を受け取ります。
 
-# コマンドリスト
+`[]` 内はオプショナル引数です。<br>
+`<>` 内は必須引数です。
 
 ## 一般
 
@@ -15,7 +13,10 @@
 - [x] `ar help` ヘルプを表示します。
 - [x] `ar info` プラグインの情報を表示します。
 - [x] `ar reload` マップ及び設定をリロードします。
-- [ ] `ar export <type>` マップデータをエクスポートします。 type は `json` か `csv` です。
+- [ ] `ar export <dataType> <fileType> ` <br> マップデータをエクスポートします。 dataTypeは`station`, `railway`, `group`
+  のいずれかです。 fileTypeは`json`, `csv`のいずれかです。
+- [ ] `ar import <dataType> <fileName> ` <br> マップデータをインポートします。 dataTypeは`station`, `railway`, `group`
+  のいずれかです。 ファイルの形式は拡張子によって判断されます。
 
 ## 路線
 
