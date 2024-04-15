@@ -57,7 +57,7 @@ class StationDataLoader: KoinComponent {
             )
             val size = stationData.overrideSize ?: joinedCount[stationData.stationId]?.let {
                 config.circleDefault.times(it)
-            } ?: 1.0
+            } ?: config.circleDefault
             val marker =
                 Marker.circle(Point.of(stationData.point.x, stationData.point.z), size).markerOptions(colorOption)
             provider.addMarker(key, marker)
