@@ -1,12 +1,12 @@
 [versions]
 paperVersion = "1.20.4-R0.1-SNAPSHOT"
 mccoroutineVersion = "2.15.0"
-lampVersion = "3.1.9"
-koinVersion = "3.5.3"
+lampVersion = "3.2.1"
+koinVersion = "3.5.6"
 coroutineVersion = "1.8.0"
 serializationVersion = "1.6.3"
 protocolLibVersion = "5.2.0-SNAPSHOT"
-junitVersion = "5.10.1"
+junitVersion = "5.10.2"
 
 [libraries]
 paper-api = { group = "io.papermc.paper", name = "paper-api", version.ref = "paperVersion" }
@@ -14,14 +14,14 @@ squaremap-api = { group = "xyz.jpenilla", name = "squaremap-api", version = "1.2
 lamp-common = { group = "com.github.Revxrsal.Lamp", name = "common", version.ref = "lampVersion" }
 lamp-bukkit = { group = "com.github.Revxrsal.Lamp", name = "bukkit", version.ref = "lampVersion" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "serializationVersion" }
-kotlinx-serialization-csv = { group = "app.softwork", name = "kotlinx-serialization-csv", version = "LATEST" }
+kotlinx-serialization-csv = { group = "app.softwork", name = "kotlinx-serialization-csv", version = "0.0.18" }
 kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutineVersion" }
 mccoroutine-bukkit-api = { group = "com.github.shynixn.mccoroutine", name = "mccoroutine-bukkit-api", version.ref = "mccoroutineVersion" }
 mccoroutine-bukkit-core = { group = "com.github.shynixn.mccoroutine", name = "mccoroutine-bukkit-core", version.ref = "mccoroutineVersion" }
 koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koinVersion" }
 protocolLib = { group = "com.comphenix.protocol", name = "ProtocolLib", version.ref = "protocolLibVersion" }
 arrow-core = { group = "io.arrow-kt", name = "arrow-core", version = "1.2.1" }
-arrow-fx-coroutines = { group = "io.arrow-kt", name = "arrow-fx-coroutines", version = "1.2.1" }
+arrow-fx-coroutines = { group = "io.arrow-kt", name = "arrow-fx-coroutines", version = "1.2.4" }
 junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter", version.ref = "junitVersion" }
 
 [plugins]
@@ -30,4 +30,4 @@ plugin-yml = { id = "net.minecrell.plugin-yml.bukkit", version = "0.6.0" }
 shadow = { id = "com.github.johnrengelman.shadow", version = "8.1.1" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version = "1.9.22" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version = "1.9.22" }
-kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version = "1.9.22" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version = "1.9.23" }
