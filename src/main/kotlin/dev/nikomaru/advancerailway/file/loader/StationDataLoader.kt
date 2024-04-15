@@ -51,14 +51,13 @@ class StationDataLoader: KoinComponent {
             val color = stationData.color
             val colorOption = MarkerOptions.builder().fillColor(color.brighter()).strokeColor(color).clickTooltip(
                 """
-                ${if (stationData.numbering != null) "${stationData.numbering}</span><br/>" else ""}
-                名前 : ${stationData.name}</span><br/>
+                ${if (stationData.numbering != null) "${stationData.numbering} </span><br/>" else ""}
+                名前 : ${stationData.name} </span><br/>
                 """.trimIndent()
             )
             val size = stationData.overrideSize ?: joinedCount[stationData.stationId]?.let {
                 config.circleDefault.times(it)
             } ?: 1.0
-            plugin.logger.info("size of ${stationData.stationId.value}: $size")
             val marker =
                 Marker.circle(Point.of(stationData.point.x, stationData.point.z), size).markerOptions(colorOption)
             provider.addMarker(key, marker)

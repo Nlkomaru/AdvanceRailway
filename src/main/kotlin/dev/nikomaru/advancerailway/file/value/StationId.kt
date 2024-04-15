@@ -22,6 +22,23 @@ import kotlinx.serialization.encoding.Encoder
 @Serializable(with = StationNameSerializer::class)
 class StationId(val value: String) {
     suspend fun toData() = StationUtils.getStationData(this).getOrNull()
+
+    override fun toString(): String {
+        return value
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is StationId) return false
+
+        if (value != other.value) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return value.hashCode()
+    }
 }
 
 object StationNameSerializer: KSerializer<StationId> {

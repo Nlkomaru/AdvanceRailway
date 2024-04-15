@@ -47,8 +47,8 @@ class RailwayDataLoader: KoinComponent {
                 else -> "->"
             }
             val option = MarkerOptions.builder().clickTooltip("""
-                行き先 : ${data.fromStation.toData()?.name} $arrow ${data.toStation.toData()?.name}</span><br/>
-                所要時間 : 約 ${ceil(data.timeRequired / 6.0) / 10} 分</span><br/>
+                行き先 : ${data.fromStation.toData()?.name} $arrow ${data.toStation.toData()?.name} </span><br/>
+                所要時間 : 約 ${ceil(data.timeRequired / 6.0) / 10} 分 </span><br/>
                 ${data.group?.let { "${it.toData()?.name}" } ?: ""}
             """.trimIndent())
             val random = Random()
