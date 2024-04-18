@@ -13,6 +13,7 @@ import arrow.core.Either
 import dev.nikomaru.advancerailway.Point3D
 import dev.nikomaru.advancerailway.utils.RailwayUtils
 import dev.nikomaru.advancerailway.utils.RailwayUtils.railEndpointInspect
+import dev.nikomaru.advancerailway.utils.StationUtils
 import dev.nikomaru.advancerailway.utils.coroutines.async
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -68,7 +69,14 @@ class RailClickEvent: Listener {
                         val list = it.value.toList()
                         list.forEach { value ->
                             val (start, direction, end) = value
-                            player.sendRichMessage("Railway Data : ${start!!.toPlainString()} -> ${direction!!.toPlainString()} -> ${end!!.toPlainString()}  <click:suggest_command:'/ar railway add <railwayId> ${start.toPlainString()} ${direction.toPlainString()} ${end.toPlainString()}'>[create]</click>")
+                            val startStation = StationUtils.nearStation(start!!.toLocation(player.world)).getOrNull()
+                            val endStation = StationUtils.nearStation(end!!.toLocation(player.world)).getOrNull()
+                            val railwayId = startStation!!.value + "_" + endStation!!.value
+                            val suggestMessage =
+                                "<click:suggest_command:'/ar railway add $railwayId ${start.toPlainString()} ${direction!!.toPlainString()} ${end.toPlainString()}'>[create]</click>"
+                            player.sendRichMessage(
+                                "Railway Data : ${startStation.toData()?.name} : ${start.toPlainString()} -> ${endStation.toData()?.name} : ${end.toPlainString()} $suggestMessage"
+                            )
                         }
                     }
 

@@ -10,6 +10,9 @@
 package dev.nikomaru.advancerailway.utils
 
 import dev.nikomaru.advancerailway.Point3D
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.csv.Csv
+import kotlinx.serialization.csv.config.QuoteMode
 import kotlinx.serialization.json.Json
 import org.bukkit.Location
 
@@ -19,6 +22,13 @@ object Utils {
         isLenient = true
         encodeDefaults = true
         prettyPrint = true
+    }
+
+    @OptIn(ExperimentalSerializationApi::class)
+    val csv = Csv {
+        hasHeaderRecord = true
+        ignoreUnknownColumns = true
+        quoteMode = QuoteMode.ALL
     }
 
     fun Location.toPoint3D() = Point3D(x, y, z)

@@ -13,14 +13,23 @@
 - [x] `ar help` ヘルプを表示します。
 - [x] `ar info` プラグインの情報を表示します。
 - [x] `ar reload` マップ及び設定をリロードします。
-- [ ] `ar export <dataType> <fileType> ` <br> マップデータをエクスポートします。 dataTypeは`station`, `railway`, `group`
+
+## ファイル操作
+
+!!! warning
+ファイル操作はデータの破損の原因となります。十分な注意を払って操作してください。<br>
+詳しくは、[こちら](/usage/file)を参照してください。
+
+- [x] `ar export <dataType> <fileType> ` <br> マップデータをエクスポートします。 dataTypeは`station`, `railway`, `group`
   のいずれかです。 fileTypeは`json`, `csv`のいずれかです。
-- [ ] `ar import <dataType> <fileName> ` <br> マップデータをインポートします。 dataTypeは`station`, `railway`, `group`
+- [x] `ar import <dataType> <fileName> ` <br> マップデータをインポートします。 dataTypeは`station`, `railway`, `group`
   のいずれかです。 ファイルの形式は拡張子によって判断されます。
 
 ## 路線
 
 - [x] `ar railway add <railwayId> <railwayName> <start> <direction> <end>` 路線を追加します。
+- [x] `ar railway remove <railwayId>` 路線を削除します。
+- [ ] `ar railway preview <start> <direction> <end>` 路線の名前を変更します。
 - [x] `ar railway update <railwayId> <start> <direction> <end>` 路線の始点と終点を変更します。 道中の路線が変化した場合もこちらを使用してください。
 - [x] `ar railway set nam <railwayId>` 路線を削除します。
 - [x] `ar railway set lineType <railwayId> <lineType>` 路線の色を変更します。

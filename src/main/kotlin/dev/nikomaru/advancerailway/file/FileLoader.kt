@@ -9,6 +9,7 @@
 
 package dev.nikomaru.advancerailway.file
 
+import dev.nikomaru.advancerailway.AdvanceRailway
 import dev.nikomaru.advancerailway.file.loader.ConfigDataLoader
 import dev.nikomaru.advancerailway.file.loader.RailwayDataLoader
 import dev.nikomaru.advancerailway.file.loader.StationDataLoader
@@ -18,7 +19,13 @@ import xyz.jpenilla.squaremap.api.SimpleLayerProvider
 
 object FileLoader: KoinComponent {
     private val provider: SimpleLayerProvider by inject()
+    private val plugin: AdvanceRailway by inject()
     suspend fun load() {
+        val importFolder = plugin.dataFolder.resolve("import")
+        if (!importFolder.exists()) {
+            importFolder.mkdirs()
+        }
+
         provider.clearMarkers()
         ConfigDataLoader().load()
         StationDataLoader().load()
