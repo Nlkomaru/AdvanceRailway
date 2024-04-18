@@ -1,27 +1,30 @@
 [versions]
 paperVersion = "1.20.4-R0.1-SNAPSHOT"
+squaremapVersion = "1.2.3"
 mccoroutineVersion = "2.15.0"
 lampVersion = "3.2.1"
 koinVersion = "3.5.6"
 coroutineVersion = "1.8.0"
 serializationVersion = "1.6.3"
+csvSerializationVersion = "2.0.0"
 protocolLibVersion = "5.2.0-SNAPSHOT"
 junitVersion = "5.10.2"
+arrow-ktVersion = "1.2.4"
 
 [libraries]
 paper-api = { group = "io.papermc.paper", name = "paper-api", version.ref = "paperVersion" }
-squaremap-api = { group = "xyz.jpenilla", name = "squaremap-api", version = "1.2.3" }
+squaremap-api = { group = "xyz.jpenilla", name = "squaremap-api", version.ref = "squaremapVersion" }
 lamp-common = { group = "com.github.Revxrsal.Lamp", name = "common", version.ref = "lampVersion" }
 lamp-bukkit = { group = "com.github.Revxrsal.Lamp", name = "bukkit", version.ref = "lampVersion" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "serializationVersion" }
-kotlinx-serialization-csv = { group = "app.softwork", name = "kotlinx-serialization-csv", version = "0.0.18" }
+kotlinx-serialization-csv = { group = "de.brudaswen.kotlinx.serialization", name = "kotlinx-serialization-csv", version.ref = "csvSerializationVersion" }
 kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutineVersion" }
 mccoroutine-bukkit-api = { group = "com.github.shynixn.mccoroutine", name = "mccoroutine-bukkit-api", version.ref = "mccoroutineVersion" }
 mccoroutine-bukkit-core = { group = "com.github.shynixn.mccoroutine", name = "mccoroutine-bukkit-core", version.ref = "mccoroutineVersion" }
 koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koinVersion" }
 protocolLib = { group = "com.comphenix.protocol", name = "ProtocolLib", version.ref = "protocolLibVersion" }
-arrow-core = { group = "io.arrow-kt", name = "arrow-core", version = "1.2.1" }
-arrow-fx-coroutines = { group = "io.arrow-kt", name = "arrow-fx-coroutines", version = "1.2.4" }
+arrow-core = { group = "io.arrow-kt", name = "arrow-core", version.ref = "arrow-ktVersion" }
+arrow-fx-coroutines = { group = "io.arrow-kt", name = "arrow-fx-coroutines", version.ref = "arrow-ktVersion" }
 junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter", version.ref = "junitVersion" }
 
 [plugins]

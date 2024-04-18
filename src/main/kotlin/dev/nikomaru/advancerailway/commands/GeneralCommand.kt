@@ -11,7 +11,6 @@ package dev.nikomaru.advancerailway.commands
 
 import dev.nikomaru.advancerailway.AdvanceRailway
 import dev.nikomaru.advancerailway.file.FileLoader
-import dev.nikomaru.advancerailway.file.type.ExportFileType
 import dev.nikomaru.advancerailway.listener.RailClickEvent
 import dev.nikomaru.advancerailway.utils.Utils.toPoint3D
 import org.bukkit.command.CommandSender
@@ -73,10 +72,5 @@ class GeneralCommand: KoinComponent {
     suspend fun reload(sender: CommandSender) {
         FileLoader.load()
         sender.sendRichMessage("Reloaded map and config data.")
-    }
-
-    @Subcommand("export")
-    fun export(sender: CommandSender, type: ExportFileType) { //TODO: Implement export
-        sender.sendRichMessage("This feature is not implemented yet.")
     }
 }
