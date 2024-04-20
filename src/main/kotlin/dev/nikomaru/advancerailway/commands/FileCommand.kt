@@ -79,7 +79,7 @@ class FileCommand: KoinComponent {
                 fileDir.mkdirs()
                 val groupData = stringFormat.decodeFromString<List<GroupData>>(data)
                 groupData.forEach {
-                    val file = plugin.dataFolder.resolve("data").resolve("groups").resolve("${it.groupId}.json")
+                    val file = plugin.dataFolder.resolve("data").resolve("groups").resolve("${it.groupId.value}.json")
                     file.writeText(json.encodeToString(it))
                 }
             }
@@ -90,7 +90,7 @@ class FileCommand: KoinComponent {
                 fileDir.mkdirs()
                 val railwayData = stringFormat.decodeFromString<List<RailwayData>>(data)
                 railwayData.forEach {
-                    val file = plugin.dataFolder.resolve("data").resolve("railways").resolve("${it.id}.json")
+                    val file = plugin.dataFolder.resolve("data").resolve("railways").resolve("${it.id.value}.json")
                     file.writeText(json.encodeToString(it))
                 }
             }
@@ -101,7 +101,7 @@ class FileCommand: KoinComponent {
                 fileDir.mkdirs()
                 val stationData = stringFormat.decodeFromString<List<StationData>>(data)
                 stationData.forEach {
-                    val file = fileDir.resolve("${it.stationId}.json")
+                    val file = fileDir.resolve("${it.stationId.value}.json")
                     file.writeText(json.encodeToString(it))
                 }
             }
