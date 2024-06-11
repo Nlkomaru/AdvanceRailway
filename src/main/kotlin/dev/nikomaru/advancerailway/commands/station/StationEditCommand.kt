@@ -20,6 +20,7 @@ import org.bukkit.entity.Player
 import revxrsal.commands.annotation.Command
 import revxrsal.commands.annotation.Subcommand
 import revxrsal.commands.bukkit.annotation.CommandPermission
+import java.awt.Color
 
 @Command("ar station", "advancerailway station")
 @CommandPermission("advancerailway.command.station")
@@ -76,5 +77,21 @@ class StationEditCommand {
         }
         data.copy(numbering = numbering).save()
         sender.sendRichMessage("Station numbering set")
+    }
+
+    @Subcommand("set color")
+    suspend fun setColor(sender: CommandSender, stationId: StationId, r: Int, g: Int, b: Int) {
+        val data = when (val res = StationUtils.getStationData(stationId)) {
+            is Either.Left -> {
+                sender.sendRichMessage("Station not found")
+                return
+            }
+
+            is Either.Right -> {
+                res.value
+            }
+        }
+        data.copy(color = Color(r, g, b)).save()
+        sender.sendRichMessage("Station color set")
     }
 }

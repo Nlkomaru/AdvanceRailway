@@ -42,7 +42,7 @@ class StationDataLoader: KoinComponent {
         railwayDataFolder.listFiles()?.forEach { file ->
             val data = json.decodeFromString<RailwayData>(file.readText())
             joinedCount[data.toStation] = joinedCount.getOrDefault(data.toStation, 0) + 1
-            joinedCount[data.toStation] = joinedCount.getOrDefault(data.toStation, 0) + 1
+            joinedCount[data.fromStation] = joinedCount.getOrDefault(data.fromStation, 0) + 1
         }
 
         stationDataFolder.listFiles()?.forEach { file ->

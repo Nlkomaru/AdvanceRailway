@@ -7,8 +7,8 @@
  * If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
  */
 
-import net.minecrell.pluginyml.bukkit.BukkitPluginDescription
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
+import xyz.jpenilla.resourcefactory.bukkit.Permission
 
 plugins {
     java
@@ -16,7 +16,7 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.shadow)
     alias(libs.plugins.run.paper)
-    alias(libs.plugins.plugin.yml)
+    alias(libs.plugins.resource.factory)
 }
 
 group = "dev.nikomaru"
@@ -29,20 +29,20 @@ fun captureVersion(dependency: Dependency): String {
 
 repositories {
     mavenCentral()
-    maven("https://papermc.io/repo/repository/maven-public/")
+    maven("https://repo.papermc.io/repository/maven-public/")
     maven("https://oss.sonatype.org/content/groups/public/")
+    maven("https://s01.oss.sonatype.org/content/repositories/snapshots/")
     maven("https://oss.sonatype.org/content/repositories/snapshots/")
     maven("https://jitpack.io")
     maven("https://plugins.gradle.org/m2/")
-    maven("https://repo.codemc.io/repository/maven-public/")
+    maven("https://repo.incendo.org/content/repositories/snapshots")
     maven("https://repo.dmulloy2.net/repository/public/")
 }
-
 
 dependencies {
     compileOnly(libs.paper.api)
 
-    library(kotlin("stdlib"))
+    compileOnly(kotlin("stdlib"))
 
     implementation(libs.lamp.common)
     implementation(libs.lamp.bukkit)
@@ -66,30 +66,22 @@ dependencies {
 }
 
 java {
-    toolchain.languageVersion.set(JavaLanguageVersion.of(17))
-}
-
-kotlin {
-    sourceSets.all {
-        languageSettings {
-            languageVersion = "2.0"
-        }
-    }
+    toolchain.languageVersion.set(JavaLanguageVersion.of(21))
 }
 
 tasks {
     compileKotlin {
-        kotlinOptions.jvmTarget = "17"
+        kotlinOptions.jvmTarget = "21"
         kotlinOptions.javaParameters = true
     }
     compileTestKotlin {
-        kotlinOptions.jvmTarget = "17"
+        kotlinOptions.jvmTarget = "21"
     }
     build {
-        dependsOn(shadowJar)
+        dependsOn("shadowJar")
     }
     runServer {
-        minecraftVersion("1.20.4")
+        minecraftVersion("1.20.6")
     }
     withType<JavaCompile>().configureEach {
         options.encoding = "UTF-8"
@@ -106,26 +98,28 @@ tasks {
 
 
 
-bukkit {
-    name = "AdvanceRailway"
-    version = "miencraft_plugin_version"
-    website = "https://github.com/Nlkomaru/AdvanceRailway"
-    depend = listOf("ProtocolLib", "squaremap")
-    main = "$group.advancerailway.AdvanceRailway"
-    authors = listOf("Nikomaru")
+sourceSets.main {
+    resourceFactory {
+        bukkitPluginYaml {
+            name = "AdvanceRailway"
+            version = "miencraft_plugin_version"
+            website = "https://github.com/Nlkomaru/AdvanceRailway"
+            depend = listOf("ProtocolLib", "squaremap")
+            main = "$group.advancerailway.AdvanceRailway"
+            authors = listOf("Nikomaru")
 
-    permissions {
-        register("advancerailway.admin") {
-            default = BukkitPluginDescription.Permission.Default.OP
-            children = listOf(
-                "advancerailway.command.group",
-                "advancerailway.command.station",
-                "advancerailway.command.railway",
-                "advancerailway.command.common"
-            )
+            permissions {
+                register("advancerailway.admin") {
+                    default = Permission.Default.TRUE
+                    children(
+                        "advancerailway.command.group",
+                        "advancerailway.command.station",
+                        "advancerailway.command.railway",
+                        "advancerailway.command.common"
+                    )
+                }
+            }
+            apiVersion = "1.20"
         }
     }
-
-
-    apiVersion = "1.20"
 }
