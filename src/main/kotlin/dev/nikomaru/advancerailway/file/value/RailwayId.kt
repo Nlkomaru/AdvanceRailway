@@ -21,6 +21,7 @@ import kotlinx.serialization.encoding.Encoder
 @Serializable(with = RailwayNameSerializer::class)
 class RailwayId(val value: String) {
     suspend fun toData() = RailwayUtils.getRailwayData(this).getOrNull()
+    override fun toString(): String = value
 }
 
 object RailwayNameSerializer: KSerializer<RailwayId> {

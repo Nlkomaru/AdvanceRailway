@@ -90,7 +90,7 @@ class RailwayMainCommand: KoinComponent {
     }
 
     @Subcommand("remove")
-    suspend fun remove(sender: CommandSender, railwayId: String) {
+    suspend fun remove(sender: CommandSender, railwayId: RailwayId) {
         val file = plugin.dataFolder.resolve("data").resolve("railways").resolve("$railwayId.json")
         if (!file.exists()) {
             sender.sendRichMessage("Error: Railway not found")

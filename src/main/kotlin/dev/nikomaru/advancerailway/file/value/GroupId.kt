@@ -21,6 +21,7 @@ import kotlinx.serialization.encoding.Encoder
 @Serializable(with = GroupNameSerializer::class)
 class GroupId(val value: String) {
     suspend fun toData() = GroupUtils.getGroupData(this).getOrNull()
+    override fun toString(): String = value
 }
 
 object GroupNameSerializer: KSerializer<GroupId> {

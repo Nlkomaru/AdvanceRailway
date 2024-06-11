@@ -86,7 +86,7 @@ class DisplayLines: KoinComponent {
         val packet = protocolManager.createPacket(PacketType.Play.Server.WORLD_PARTICLES)
         packet.newParticles.write(
             0, WrappedParticle.create(
-                Particle.REDSTONE, Particle.DustOptions(color, 2.0F)
+                Particle.DUST, Particle.DustOptions(color, 2.0F)
             )
         )
         packet.doubles.write(0, x).write(1, y).write(2, z)

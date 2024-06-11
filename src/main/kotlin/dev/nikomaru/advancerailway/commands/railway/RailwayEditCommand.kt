@@ -105,8 +105,8 @@ class RailwayEditCommand: KoinComponent {
                 res.value
             }
         }
-        data.copy(fromStation = stationId).save()
-        sender.sendRichMessage("From station set to $stationId")
+        data.copy(toStation = stationId).save()
+        sender.sendRichMessage("To station set to $stationId")
 
     }
 }
