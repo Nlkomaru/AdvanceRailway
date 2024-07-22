@@ -1,6 +1,6 @@
 [versions]
 paperVersion = "1.20.6-R0.1-SNAPSHOT"
-squaremapVersion = "1.2.3"
+squaremapVersion = "1.2.6"
 mccoroutineVersion = "2.16.0"
 lampVersion = "3.2.1"
 koinVersion = "3.5.6"
