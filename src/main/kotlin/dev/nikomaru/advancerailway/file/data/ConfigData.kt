@@ -14,5 +14,8 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class ConfigData(
     val limit: Long,
-    val circleDefault: Double = 1.0,
+    val circleSizeBase: Double = 5.0,
+    val circleMax: Double = 20.0,
+    val circleMultiple: Double = 5.0, // size = base + (multiple * (stations.size))
+    val calcString: String = "base + (multiple * (stations.size))", //TODO: Implement this
 )
