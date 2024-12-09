@@ -9,7 +9,7 @@ serializationVersion = "1.7.3"
 csvSerializationVersion = "2.0.0"
 protocolLibVersion = "5.3.0"
 junitVersion = "5.11.3"
-arrow-ktVersion = "1.2.4"
+arrow-ktVersion = "2.0.0"
 
 [libraries]
 paper-api = { group = "io.papermc.paper", name = "paper-api", version.ref = "paperVersion" }
