@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+    <url>
+        <loc>https://advance-railway.nikomaru.page/</loc>
+        <lastmod>2025-05-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://advance-railway.nikomaru.page/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://advance-railway.nikomaru.page/en/"/>
+    </url>
+    <url>
+        <loc>https://advance-railway.nikomaru.page/commands/</loc>
+        <lastmod>2025-05-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://advance-railway.nikomaru.page/commands/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://advance-railway.nikomaru.page/en/commands/"/>
+    </url>
+    <url>
+        <loc>https://advance-railway.nikomaru.page/usage/</loc>
+        <lastmod>2025-05-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://advance-railway.nikomaru.page/usage/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://advance-railway.nikomaru.page/en/usage/"/>
+    </url>
+    <url>
+        <loc>https://advance-railway.nikomaru.page/usage/file/</loc>
+        <lastmod>2025-05-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://advance-railway.nikomaru.page/usage/file/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://advance-railway.nikomaru.page/en/usage/file/"/>
+    </url>
+    <url>
+        <loc>https://advance-railway.nikomaru.page/en/</loc>
+        <lastmod>2025-05-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://advance-railway.nikomaru.page/en/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://advance-railway.nikomaru.page/"/>
+    </url>
+    <url>
+        <loc>https://advance-railway.nikomaru.page/en/commands/</loc>
+        <lastmod>2025-05-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://advance-railway.nikomaru.page/en/commands/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://advance-railway.nikomaru.page/commands/"/>
+    </url>
+    <url>
+        <loc>https://advance-railway.nikomaru.page/en/usage/</loc>
+        <lastmod>2025-05-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://advance-railway.nikomaru.page/en/usage/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://advance-railway.nikomaru.page/usage/"/>
+    </url>
+    <url>
+        <loc>https://advance-railway.nikomaru.page/en/usage/file/</loc>
+        <lastmod>2025-05-05</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://advance-railway.nikomaru.page/en/usage/file/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://advance-railway.nikomaru.page/usage/file/"/>
+    </url>
+</urlset>
